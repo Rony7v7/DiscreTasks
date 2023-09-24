@@ -1,9 +1,6 @@
-package com.discretask.test;
-
 import org.junit.jupiter.api.Test;
 
 import com.discretask.structures.Queue;
-
 
 public class QueueTest {
 
@@ -13,7 +10,6 @@ public class QueueTest {
         queue = new Queue<String>();
     }
 
-    
     void setupScenary2() {
         queue = new Queue<String>();
         queue.enqueue("Hola");
@@ -22,14 +18,12 @@ public class QueueTest {
     }
 
     @Test
-    
     void testBack() {
         setupScenary2();
         assert queue.back().equals("!");
     }
 
     @Test
-    
     void testClear() {
         setupScenary2();
         queue.clear();
@@ -37,7 +31,7 @@ public class QueueTest {
     }
 
     @Test
-    
+
     void testDequeue() {
         setupScenary2();
         queue.dequeue();
@@ -45,7 +39,7 @@ public class QueueTest {
     }
 
     @Test
-    
+
     void testEnqueue() {
         setupScenary1();
         queue.enqueue("Hola");
@@ -53,21 +47,21 @@ public class QueueTest {
     }
 
     @Test
-    
+
     void testFront() {
         setupScenary2();
         assert queue.front().equals("Hola");
     }
 
     @Test
-    
+
     void testIsEmpty() {
         setupScenary1();
         assert queue.isEmpty();
     }
 
     @Test
-    
+
     void testSize() {
         setupScenary2();
         assert queue.size() == 3;

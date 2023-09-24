@@ -1,1 +1,7 @@
+com\discretask\structures\Queue.class
+com\discretask\interfaces\INode.class
+com\discretask\interfaces\IQueue.class
+com\discretask\interfaces\IStack.class
 com\discretask\Main.class
+com\discretask\structures\Node.class
+com\discretask\structures\Stack.class
