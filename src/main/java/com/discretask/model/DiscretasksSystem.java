@@ -30,6 +30,8 @@ public class DiscretasksSystem {
         } else {
             // HeapTasks.enqueue(task);
         }
+
+        autoSave();
     }
 
     //edit task
@@ -39,8 +41,20 @@ public class DiscretasksSystem {
         task.setPriority(priority);
         task.setUserCategory(userCategory);
         task.setDeadline(deadline);
+
+        autoSave();
     }
 
-    
+    // No se si es mejor llamarlo desde el main (depende del javafx) porque desde el controller tocaria
+    // llamarlo en cada metodo de modificación, incumpliendo con el principio de responsabilidad única.
+    public void autoSave() {
+        operationStack.push(this);
+    }
+
+    public void undo() {
+        DiscretasksSystem previousState = operationStack.pop();
+        this.tasks = previousState.tasks;
+        this.nonPriorityTasks = previousState.nonPriorityTasks;
+    }
 
 }
