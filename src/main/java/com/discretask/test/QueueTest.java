@@ -2,7 +2,7 @@ package com.discretask.test;
 
 import org.junit.jupiter.api.Test;
 
-import structures.queue.Queue;;
+import com.discretask.structures.Queue;
 
 
 public class QueueTest {

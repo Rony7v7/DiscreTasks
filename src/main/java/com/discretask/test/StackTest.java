@@ -3,7 +3,7 @@ package com.discretask.test;
 import static org.junit.Assert.assertEquals;
 import org.junit.jupiter.api.Test;
 
-import com.discretask.structures.stack.Stack;
+import com.discretask.structures.Stack;
 
 public class StackTest {
 

@@ -1,7 +1,6 @@
-package com.discretask.structures.queue;
+package com.discretask.structures;
 
 import com.discretask.interfaces.IQueue;
-import com.discretask.structures.nodes.Node;
 
 public class Queue<T> implements IQueue<T>{
 

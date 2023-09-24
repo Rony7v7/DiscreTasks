@@ -1,4 +1,4 @@
-package com.discretask.structures.nodes;
+package com.discretask.structures;
 
 import com.discretask.interfaces.INode;
 
