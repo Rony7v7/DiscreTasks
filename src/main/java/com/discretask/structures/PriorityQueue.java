@@ -93,6 +93,41 @@ public class PriorityQueue<T> {
         }
     }
 
+     /**
+     * The `heapify` method is used in the `HeapSort` method to maintain the heap
+     * property of the priority queue. It takes two parameters: `n` which
+     * represents the size of the heap, and `i` which represents the index of the
+     * current node being heapified.
+     * @param n
+     * @param i
+     */
+    @SuppressWarnings("unchecked")
+    private void heapify(int n, int i) {
+        int largest = i;
+        int left = 2 * i + 1;
+        int right = 2 * i + 2;
+
+        Comparable<T> largestItem = (Comparable<T>) heap[largest];
+        Comparable<T> leftItem = (Comparable<T>) heap[left];
+        Comparable<T> rightItem = (Comparable<T>) heap[right];
+
+        if (left < n && leftItem.compareTo((T) largestItem) > 0) {
+            largest = left;
+        }
+
+        if (right < n && rightItem.compareTo((T) largestItem) > 0) {
+            largest = right;
+        }
+
+        if (largest != i) {
+            Object swap = heap[i];
+            heap[i] = heap[largest];
+            heap[largest] = swap;
+
+            heapify(n, largest);
+        }
+    }
+
    
 }
 
