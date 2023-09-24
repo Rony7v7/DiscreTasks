@@ -222,4 +222,25 @@ public class HashTable<K, V> implements IHashTable<K, V> {
         table = new NodeHashTable[DEFAULT_SIZE];
     }
 
+    /**
+     * The function returns an array of keys from a hash table.
+     * 
+     * @return The method `keySet()` is returning an array of type `K[]`, which represents the set of keys
+     * in the hash table.
+     */
+    @SuppressWarnings("unchecked")
+    public K[] keySet() {
+        K[] keys = (K[]) new Object[size];
+        int index = 0;
+        for (int i = 0; i < table.length; i++) {
+            NodeHashTable<K, V> node = table[i];
+            while (node != null) {
+                keys[index] = node.getKey();
+                index++;
+                node = node.getNext();
+            }
+        }
+        return keys;
+    }
+
 }
