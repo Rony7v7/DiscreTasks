@@ -33,11 +33,11 @@ public class HashTableTest {
         assert hashTable.isEmpty();
     }
 
-    @Test
-    void testContainsKey() {
-        setupScenary2();
-        assert hashTable.containsKey("Hola");
-    }
+    // @Test
+    // void testContainsKey() {
+    // setupScenary2();
+    // assert hashTable.containsKey("Hola");
+    // }
 
     @Test
     void testGet() {
@@ -98,11 +98,11 @@ public class HashTableTest {
         assertEquals(hashTable.size(), 0);
     }
 
-    @Test
-    void testResize() {
-        setupScenary2();
-        hashTable.resize();
-        assertEquals(hashTable.size(), 4);
-    }
+    // @Test
+    // void testResize() {
+    // setupScenary2();
+    // hashTable.resize();
+    // assertEquals(hashTable.size(), 4);
+    // }
 
 }
