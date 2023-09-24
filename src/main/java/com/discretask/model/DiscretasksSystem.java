@@ -1,6 +1,7 @@
 package com.discretask.model;
 
 import java.util.Calendar;
+import java.util.PriorityQueue;
 
 import com.discretask.structures.HashTable;
 import com.discretask.structures.Queue;
@@ -10,13 +11,14 @@ public class DiscretasksSystem {
     
     private HashTable<String, Task> tasks;
     private Queue<Task> nonPriorityTasks;
-    // private Queue<Task> priorityTasks;
+    private PriorityQueue<String> ordelyTasks ;
     private Stack<DiscretasksSystem> operationStack;
 
     public DiscretasksSystem() {
         tasks = new HashTable<String, Task>();
         nonPriorityTasks = new Queue<Task>();
         operationStack = new Stack<DiscretasksSystem>();
+        ordelyTasks = new PriorityQueue<String>(tasks.size());
     }
 
     //add task
@@ -39,6 +41,19 @@ public class DiscretasksSystem {
         task.setPriority(priority);
         task.setUserCategory(userCategory);
         task.setDeadline(deadline);
+    }
+
+    public String showTasks() {
+        for (String key : tasks.keySet()) {
+            ordelyTasks.offer(key);
+        }
+
+        // Get the keys in order and use them to access the values in the Hashtable
+        while (!ordelyTasks.isEmpty()) {
+            String key = ordelyTasks.poll();
+            Task value = tasks.get(key);
+            // Make use of the key and value however we need
+        }
     }
 
     
