@@ -65,8 +65,10 @@ public class HashTable<K, V> implements IHashTable<K, V> {
         size = 0;
 
         for (int i = 0; i < oldTable.length; i++) {
-            if (oldTable[i] != null) {
-                put(oldTable[i].getKey(), oldTable[i].getValue());
+            NodeHashTable<K, V> node = oldTable[i];
+            while (node != null) {
+                put(node.getKey(), node.getValue());
+                node = node.getNext();
             }
         }
     }
@@ -211,7 +213,7 @@ public class HashTable<K, V> implements IHashTable<K, V> {
      */
     @Override
     public int hash(K key) {
-        int index = key.hashCode() % DEFAULT_SIZE;
+        int index = key.hashCode() % table.length;
         return index >= 0 ? index : index * -1;
     }
 
