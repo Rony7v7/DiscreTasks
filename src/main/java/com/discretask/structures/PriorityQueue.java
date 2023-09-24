@@ -77,6 +77,22 @@ public class PriorityQueue<T> {
         heap[j] = temp;
     }
 
+    public void HeapSort() {
+        int n = size;
+
+        for (int i = n / 2 - 1; i >= 0; i--) {
+            heapify(n, i);
+        }
+
+        for (int i = n - 1; i >= 0; i--) {
+            Object temp = heap[0];
+            heap[0] = heap[i];
+            heap[i] = temp;
+
+            heapify(i, 0);
+        }
+    }
+
    
 }
 
