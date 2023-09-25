@@ -67,27 +67,21 @@ public class addTaskMenuController {
             content = contentInput.getText();
             priority = Priority.valueOf(priorityRadio.getSelectedToggle().getUserData().toString());
             userCategory = categoryInput.getText();
+
             deadLine.set(deadLineInput.getValue().getYear(), deadLineInput.getValue().getMonthValue(),
                     deadLineInput.getValue().getDayOfMonth());
 
-            if (deadLine.before(Calendar.getInstance())) {
+            if (deadLine.before(Calendar.getInstance())
+                    || deadLine.get(Calendar.DAY_OF_MONTH) < Calendar.getInstance().get(Calendar.DAY_OF_MONTH)) {
                 throw new invalidDateException("The date is before today");
             }
 
         } catch (NullPointerException e) {
             hasError = true;
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText("Error");
-            alert.setContentText("Please fill in all the fields");
-            alert.showAndWait();
+            showError("Error", "Error", "Please fill all the fields");
         } catch (invalidDateException e) {
             hasError = true;
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText("Error");
-            alert.setContentText(e.getMessage());
-            alert.showAndWait();
+            showError("Error", "Error", e.getMessage());
         }
 
         if (!hasError) {
@@ -99,5 +93,13 @@ public class addTaskMenuController {
             }
         }
 
+    }
+
+    private void showError(String title, String headerText, String contentText) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle(title);
+        alert.setHeaderText(headerText);
+        alert.setContentText(contentText);
+        alert.showAndWait();
     }
 }
