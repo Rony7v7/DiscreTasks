@@ -25,6 +25,7 @@ public class DiscretasksSystem {
     public void addTask(String title, String content, Priority priority, String userCategory, Calendar deadline) {
         Task task = new Task(title, content, priority, userCategory, deadline);
         tasks.put(title, task);
+        ordelyTasks.offer(title);
         if (priority == Priority.NON_PRIORITY) {
             nonPriorityTasks.enqueue(task);
         } else if (priority == Priority.PRIORITY) {
@@ -42,20 +43,6 @@ public class DiscretasksSystem {
         task.setUserCategory(userCategory);
         task.setDeadline(deadline);
     }
-
-    public String showTasks() {
-        for (String key : tasks.keySet()) {
-            ordelyTasks.offer(key);
-        }
-
-        // Get the keys in order and use them to access the values in the Hashtable
-        while (!ordelyTasks.isEmpty()) {
-            String key = ordelyTasks.poll();
-            Task value = tasks.get(key);
-            // Make use of the key and value however we need
-        }
-    }
-
     
 
 }
