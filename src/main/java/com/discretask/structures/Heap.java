@@ -1,17 +1,21 @@
 package com.discretask.structures;
 
-public class PriorityQueue<T> {
+import com.discretask.interfaces.IPriorityQueue;
+
+public class Heap<T> implements IPriorityQueue<T> {
+    
     private Object[] heap; 
     private int size;
     private int capacity;
 
-    public PriorityQueue(int capacity) {
+    public Heap(int capacity) {
         this.capacity = capacity;
         this.heap = new Object[capacity];
         this.size = 0;
     }
 
     @SuppressWarnings("unchecked")
+    @Override
     public void offer(T item) {
         if (size == capacity) {
             resize();
@@ -41,6 +45,7 @@ public class PriorityQueue<T> {
     }
 
     @SuppressWarnings("unchecked")
+    @Override
     public T poll() {
         if (isEmpty()) {
             throw new IllegalStateException("PriorityQueue is empty");
@@ -70,12 +75,28 @@ public class PriorityQueue<T> {
         return root;
     }
 
+    @Override
     public boolean isEmpty() {
         return size == 0;
     }
 
+    @Override
+    public T peek() {
+        if (isEmpty()) {
+            throw new IllegalStateException("PriorityQueue is empty");
+        }
+        return (T) heap[0];
+    }
+
+    @Override
     public int size() {
         return size;
+    }
+
+    @Override
+    public void clear() {
+        heap = new Object[capacity];
+        size = 0;
     }
 
     private void swap(int i, int j) {
@@ -134,8 +155,6 @@ public class PriorityQueue<T> {
             heapify(n, largest);
         }
     }
-
-
    
 }
 
