@@ -15,7 +15,7 @@
             <Font size="25.0" />
          </font>
       </Text>
-      <Button fx:id="addButton" layoutX="52.0" layoutY="99.0" mnemonicParsing="false" onAction="#sayHelloWorld" prefHeight="56.0" prefWidth="95.0" text="Add" />
+      <Button fx:id="addButton" layoutX="52.0" layoutY="99.0" mnemonicParsing="false" onAction="#addTask" prefHeight="56.0" prefWidth="95.0" text="Add" />
       <RadioButton fx:id="priorityRadioBTN" layoutX="55.0" layoutY="323.0" mnemonicParsing="false" text="Priority">
          <font>
             <Font size="18.0" />
