@@ -86,7 +86,6 @@ public class addTaskMenuController {
 
         if (!hasError) {
             discretasksSystem.addTask(title, content, priority, userCategory, deadLine);
-            System.out.println("I added the new task");
 
             if (stage != null) {
                 stage.close();
