@@ -6,18 +6,18 @@ public class Heap<T> implements IPriorityQueue<T> {
     
     private Object[] heap; 
     private int size;
-    private int capacity;
+    private int DEFAULT_SIZE = 11;
 
-    public Heap(int capacity) {
-        this.capacity = capacity;
-        this.heap = new Object[capacity];
+
+    public Heap() {
+        this.heap = new Object[DEFAULT_SIZE];
         this.size = 0;
     }
 
     @SuppressWarnings("unchecked")
     @Override
     public void offer(T item) {
-        if (size == capacity) {
+        if (size == DEFAULT_SIZE) {
             resize();
         }
         heap[size] = item;
@@ -38,8 +38,8 @@ public class Heap<T> implements IPriorityQueue<T> {
     }
 
     private void resize() {
-        capacity *= 2;
-        Object[] newHeap = new Object[capacity];
+        DEFAULT_SIZE *= 2;
+        Object[] newHeap = new Object[DEFAULT_SIZE];
         System.arraycopy(heap, 0, newHeap, 0, size);
         heap = newHeap;
     }
@@ -95,7 +95,7 @@ public class Heap<T> implements IPriorityQueue<T> {
 
     @Override
     public void clear() {
-        heap = new Object[capacity];
+        heap = new Object[DEFAULT_SIZE];
         size = 0;
     }
 

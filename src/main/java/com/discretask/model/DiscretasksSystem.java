@@ -5,24 +5,27 @@ import java.util.Calendar;
 import com.discretask.structures.HashTable;
 import com.discretask.structures.Queue;
 import com.discretask.structures.Stack;
+import com.discretask.structures.Heap;
 
 public class DiscretasksSystem {
     
     private HashTable<String, Task> tasks;
     private Queue<Task> nonPriorityTasks;
-    // private Queue<Task> priorityTasks;
+    private Heap<Task> priorityTasks;
     private Stack<DiscretasksSystem> operationStack;
 
     public DiscretasksSystem() {
         tasks = new HashTable<String, Task>();
         nonPriorityTasks = new Queue<Task>();
         operationStack = new Stack<DiscretasksSystem>();
+        priorityTasks = new Heap<Task>();
     }
 
     //add task
     public void addTask(String title, String content, Priority priority, String userCategory, Calendar deadline) {
         Task task = new Task(title, content, priority, userCategory, deadline);
         tasks.put(title, task);
+        priorityTasks.offer(task);
         if (priority == Priority.NON_PRIORITY) {
             nonPriorityTasks.enqueue(task);
         } else if (priority == Priority.PRIORITY) {
