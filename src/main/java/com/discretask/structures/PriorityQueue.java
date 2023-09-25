@@ -14,7 +14,7 @@ public class PriorityQueue<T> {
     @SuppressWarnings("unchecked")
     public void offer(T item) {
         if (size == capacity) {
-            throw new IllegalStateException("PriorityQueue is full");
+            resize();
         }
         heap[size] = item;
         int index = size;
@@ -31,6 +31,13 @@ public class PriorityQueue<T> {
             swap(index, parentIndex);
             index = parentIndex;
         }
+    }
+
+    private void resize() {
+        capacity *= 2;
+        Object[] newHeap = new Object[capacity];
+        System.arraycopy(heap, 0, newHeap, 0, size);
+        heap = newHeap;
     }
 
     @SuppressWarnings("unchecked")
@@ -127,6 +134,7 @@ public class PriorityQueue<T> {
             heapify(n, largest);
         }
     }
+
 
    
 }
