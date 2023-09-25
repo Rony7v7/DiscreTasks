@@ -6,6 +6,7 @@ import com.discretask.model.DiscretasksSystem;
 import com.discretask.model.Priority;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextArea;
@@ -50,24 +51,36 @@ public class addTaskMenuController {
     }
 
     public void submitTask() {
-        String title = titleInput.getText();
-        String content = contentInput.getText();
-
-        Priority priority = Priority.valueOf(priorityRadio.getSelectedToggle().getUserData().toString());
-        String userCategory = categoryInput.getText();
+        String title = "";
+        String content = "";
+        Priority priority = null;
+        String userCategory = "";
         Calendar deadLine = Calendar.getInstance();
-        deadLine.set(deadLineInput.getValue().getYear(), deadLineInput.getValue().getMonthValue(),
-                deadLineInput.getValue().getDayOfMonth());
-        System.out.println(deadLine);
+        boolean hasError = false;
+        try {
+            title = titleInput.getText();
+            content = contentInput.getText();
+            priority = Priority.valueOf(priorityRadio.getSelectedToggle().getUserData().toString());
+            userCategory = categoryInput.getText();
+            deadLine.set(deadLineInput.getValue().getYear(), deadLineInput.getValue().getMonthValue(),
+                    deadLineInput.getValue().getDayOfMonth());
+        } catch (NullPointerException e) {
+            hasError = true;
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Error");
+            alert.setContentText("Please fill in all the fields");
+            alert.showAndWait();
+        }
 
-        if (priorityRadio.getSelectedToggle() != null) {
-
+        if (!hasError) {
             discretasksSystem.addTask(title, content, priority, userCategory, deadLine);
             System.out.println("I added the new task");
+
+            if (stage != null) {
+                stage.close();
+            }
         }
 
-        if (stage != null) {
-            stage.close();
-        }
     }
 }
