@@ -16,11 +16,14 @@ public class Queue<T> implements IQueue<T>{
     }
 
     @Override
-    public void dequeue() {
-        if(front != null) {
+    public T dequeue() {
+        T data = null;
+        if (front != null) {
+            data = front.getData();
             front = front.getNext();
             size--;
-        }
+        } 
+        return data;
     }
 
     @Override
