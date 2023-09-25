@@ -20,6 +20,7 @@ public class DiscretasksSystem {
         nonPriorityTasks = new Queue<Task>();
         operationStack = new Stack<DiscretasksSystem>();
         tasksByDeadLine = new Heap<Task>();
+        priorityTasks = new Heap<Task>();
     }
 
     // add task

@@ -18,6 +18,7 @@ import javafx.stage.Stage;
 public class addTaskMenuController {
 
     private DiscretasksSystem discretasksSystem;
+    private MainController mainController;
     private Stage stage;
 
     @FXML
@@ -48,6 +49,10 @@ public class addTaskMenuController {
         this.stage = stage;
     }
 
+    public void setMainController(MainController mainController) {
+        this.mainController = mainController;
+    }
+
     public void initialize() {
         // Esto es para darle las enumeracion a cada boton
         for (int i = 0; i < 3; i++)
@@ -71,8 +76,11 @@ public class addTaskMenuController {
             deadLine.set(deadLineInput.getValue().getYear(), deadLineInput.getValue().getMonthValue(),
                     deadLineInput.getValue().getDayOfMonth());
 
-            if (deadLine.before(Calendar.getInstance())
-                    || deadLine.get(Calendar.DAY_OF_MONTH) < Calendar.getInstance().get(Calendar.DAY_OF_MONTH)) {
+            if (title.equals("") || userCategory.equals("")) {
+                throw new NullPointerException();
+            }
+
+            if (!isValidDate(deadLine)) {
                 throw new invalidDateException("The date is before today");
             }
 
@@ -87,13 +95,23 @@ public class addTaskMenuController {
         if (!hasError) {
             discretasksSystem.addTask(title, content, priority, userCategory, deadLine);
 
+            mainController.updateTaskList();
+
             if (stage != null) {
                 stage.close();
             }
+
         }
 
     }
 
+    // Metodo auxiliar para ver si la fecha es valida o no (Puede que requiera
+    // ajustes)
+    private boolean isValidDate(Calendar date) {
+        return date.after(Calendar.getInstance());
+    }
+
+    // Metodo auxiliar para mostrar errores con mensajes personalizados
     private void showError(String title, String headerText, String contentText) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle(title);

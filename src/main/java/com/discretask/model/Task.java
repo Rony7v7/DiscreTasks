@@ -13,6 +13,9 @@ public class Task {
         this.title = title;
         this.content = content;
         this.priority = priority;
+        this.userCategory = userCategory;
+        this.deadline = deadline;
+
     }
 
     public String getTitle() {
