@@ -37,13 +37,18 @@ public class MainController {
     @FXML
     private ScrollPane taskViewer;
 
+    // This method is to add a taks
     public void addTask() throws IOException {
         Stage stage = new Stage();
         stage.setTitle("Add Task");
+        // Load the FXML file (Trae el archivo FXML)
         FXMLLoader loader = new FXMLLoader(Main.class.getResource("addTaskMenu.fxml"));
         Parent root = loader.load();
+        // Esto es necesario para poder acceder a los metodos del controlador
         addTaskMenuController addTaskController = loader.getController();
         stage.setScene(new Scene(root));
+        // Esto es para hacer una inyeccion de dependencias (Para que todos esten
+        // instacaiados igual)
         addTaskController.setDiscretasksSystem(controller); // Inject the system
         addTaskController.setStage(stage);
         stage.show();

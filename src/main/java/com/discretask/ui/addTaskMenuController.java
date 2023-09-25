@@ -37,19 +37,23 @@ public class addTaskMenuController {
     @FXML
     private Button submitButton;
 
+    // Son metodos para las dependencias usados en el MainController
     public void setDiscretasksSystem(DiscretasksSystem discretasksSystem) {
         this.discretasksSystem = discretasksSystem;
     }
+    // Son metodos para las dependencias usados en el MainController
 
     public void setStage(Stage stage) {
         this.stage = stage;
     }
 
     public void initialize() {
+        // Esto es para darle las enumeracion a cada boton
         for (int i = 0; i < 3; i++)
             priorityRadio.getToggles().get(i).setUserData(Priority.values()[i]);
     }
 
+    // Trae las cosas del UI y si hay un error lo muestra
     public void submitTask() {
         String title = "";
         String content = "";
