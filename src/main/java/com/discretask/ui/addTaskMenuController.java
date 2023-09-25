@@ -2,6 +2,7 @@ package com.discretask.ui;
 
 import java.util.Calendar;
 
+import com.discretask.exceptions.invalidDateException;
 import com.discretask.model.DiscretasksSystem;
 import com.discretask.model.Priority;
 
@@ -68,12 +69,24 @@ public class addTaskMenuController {
             userCategory = categoryInput.getText();
             deadLine.set(deadLineInput.getValue().getYear(), deadLineInput.getValue().getMonthValue(),
                     deadLineInput.getValue().getDayOfMonth());
+
+            if (deadLine.before(Calendar.getInstance())) {
+                throw new invalidDateException("The date is before today");
+            }
+
         } catch (NullPointerException e) {
             hasError = true;
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
             alert.setHeaderText("Error");
             alert.setContentText("Please fill in all the fields");
+            alert.showAndWait();
+        } catch (invalidDateException e) {
+            hasError = true;
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Error");
+            alert.setContentText(e.getMessage());
             alert.showAndWait();
         }
 
