@@ -47,30 +47,30 @@ public class Heap<T> implements IPriorityQueue<T> {
     @SuppressWarnings("unchecked")
     @Override
     public T poll() {
-        if (isEmpty()) {
-            throw new IllegalStateException("PriorityQueue is empty");
-        }
-        T root = (T) heap[0];
-        size--;
-        heap[0] = heap[size];
-        int index = 0;
+        T root = null;
+        if (!isEmpty()) {
+            root = (T) heap[0];
+            size--;
+            heap[0] = heap[size];
+            int index = 0;
 
-        while (true) {
-            int leftChild = 2 * index + 1;
-            int rightChild = 2 * index + 2;
-            int smallest = index;
+            while (true) {
+                int leftChild = 2 * index + 1;
+                int rightChild = 2 * index + 2;
+                int smallest = index;
 
-            if (leftChild < size && ((Comparable<T>) heap[leftChild]).compareTo((T) heap[smallest]) < 0) {
-                smallest = leftChild;
+                if (leftChild < size && ((Comparable<T>) heap[leftChild]).compareTo((T) heap[smallest]) < 0) {
+                    smallest = leftChild;
+                }
+                if (rightChild < size && ((Comparable<T>) heap[rightChild]).compareTo((T) heap[smallest]) < 0) {
+                    smallest = rightChild;
+                }
+                if (smallest == index) {
+                    break;
+                }
+                swap(index, smallest);
+                index = smallest;
             }
-            if (rightChild < size && ((Comparable<T>) heap[rightChild]).compareTo((T) heap[smallest]) < 0) {
-                smallest = rightChild;
-            }
-            if (smallest == index) {
-                break;
-            }
-            swap(index, smallest);
-            index = smallest;
         }
         return root;
     }
