@@ -74,7 +74,7 @@ public class MainController {
         for (int i = 0; i < taskArray.length; i++) {
             Task task = taskArray[i];
             // Cojemos cada tarea y la volvemos un TaskItem(Para asi poderlo mostrar)
-            TaskItem taskItem = new TaskItem(task);
+            TaskItem taskItem = new TaskItem(task, this);
             taskList.getChildren().add(taskItem);
             VBox.setVgrow(taskItem, Priority.ALWAYS);
         }
@@ -84,6 +84,11 @@ public class MainController {
 
         // Esto no me acuerdo que hace xd
         taskViewer.setFitToWidth(true);
+    }
+
+    public void deleteTask(String taskName) {
+        controller.deleteTask(taskName);
+        updateTaskList();
     }
 
     public DiscretasksSystem getController() {

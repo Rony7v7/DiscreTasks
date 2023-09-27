@@ -1,6 +1,8 @@
 package com.discretask.ui;
 
+import java.time.LocalDate;
 import java.util.Calendar;
+import java.util.Date;
 
 import com.discretask.exceptions.invalidDateException;
 import com.discretask.model.DiscretasksSystem;
@@ -66,21 +68,22 @@ public class addTaskMenuController {
         Priority priority = null;
         String userCategory = "";
         Calendar deadLine = Calendar.getInstance();
+
         boolean hasError = false;
         try {
+            LocalDate datePicked = deadLineInput.getValue();
+            Date date = java.sql.Date.valueOf(datePicked);
+            deadLine.setTime(date);
             title = titleInput.getText();
             content = contentInput.getText();
             priority = Priority.valueOf(priorityRadio.getSelectedToggle().getUserData().toString());
             userCategory = categoryInput.getText();
 
-            deadLine.set(deadLineInput.getValue().getYear(), deadLineInput.getValue().getMonthValue(),
-                    deadLineInput.getValue().getDayOfMonth());
-
             if (title.equals("") || userCategory.equals("")) {
                 throw new NullPointerException();
             }
 
-            if (!isValidDate(deadLine)) {
+            if (datePicked.isBefore(LocalDate.now())) {
                 throw new invalidDateException("The date is before today");
             }
 
@@ -90,6 +93,9 @@ public class addTaskMenuController {
         } catch (invalidDateException e) {
             hasError = true;
             showError("Error", "Error", e.getMessage());
+        } catch (Exception e) {
+            hasError = true;
+            showError("Error", "Error", "An unexpected error has ocurred");
         }
 
         if (!hasError) {
@@ -103,12 +109,6 @@ public class addTaskMenuController {
 
         }
 
-    }
-
-    // Metodo auxiliar para ver si la fecha es valida o no (Puede que requiera
-    // ajustes)
-    private boolean isValidDate(Calendar date) {
-        return date.after(Calendar.getInstance());
     }
 
     // Metodo auxiliar para mostrar errores con mensajes personalizados

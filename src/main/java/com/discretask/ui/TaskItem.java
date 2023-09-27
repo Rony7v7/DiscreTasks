@@ -7,8 +7,12 @@ import com.discretask.model.Task;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.geometry.Side;
 import javafx.scene.control.Button;
+import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Label;
+import javafx.scene.control.MenuItem;
+import javafx.scene.input.MouseButton;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -34,10 +38,25 @@ import javafx.scene.shape.Circle;
  */
 public class TaskItem extends HBox {
 
-    private Button optionsButton = new Button(". . .");
-    private SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+    private Button optionsButton;
+    private SimpleDateFormat sdf;
+    private MenuItem eliminarMenuItem;
+    private MenuItem modificarMenuItem;
+    private ContextMenu contextMenu;
+    private MainController controller;
+    private Task task;
 
-    public TaskItem(Task task) {
+    public TaskItem(Task task, MainController controller) {
+        this.controller = controller;
+        this.task = task;
+        eliminarMenuItem = new MenuItem("Eliminar");
+        modificarMenuItem = new MenuItem("Modificar");
+        contextMenu = new ContextMenu();
+        sdf = new SimpleDateFormat("dd-MM-yyyy");
+        optionsButton = new Button(". . .");
+        contextMenu.getItems().addAll(eliminarMenuItem, modificarMenuItem);
+
+        configureOptionsButton();
 
         // Add VBox containers to HBox
         getChildren().addAll(buildLeftVbox(task), buildMiddleVbox(task), buildRightVbox(task));
@@ -144,7 +163,30 @@ public class TaskItem extends HBox {
 
     private void configureOptionsButton() {
         optionsButton.setStyle(
-                "-fx-background-color: transparent; -fx-text-fill: black; -fx-alignment: top-right; -fx-font-weight: bold; -fx-font-size: 1em;  -fx-border-width: 1;");
+                " -fx-text-fill: black;" +
+                        "-fx-alignment: top-right; -fx-font-weight: bold; " +
+                        "-fx-font-size: 1em;  -fx-border-width: 1;");
+        // Configure the event to toggle the ContextMenu's visibility
+        optionsButton.setOnMouseClicked(event -> {
+            if (event.getButton() == MouseButton.PRIMARY) { // Check if left button is clicked
+                if (contextMenu.isShowing()) {
+                    contextMenu.hide();
+                } else {
+                    contextMenu.show(optionsButton, Side.TOP, 0, 0);
+                }
+            }
+        });
+
+        // Configure actions for the menu items
+        eliminarMenuItem.setOnAction(event -> {
+            controller.deleteTask(task.getTitle());
+        });
+
+        modificarMenuItem.setOnAction(event -> {
+            // Logic to modify the task
+            System.out.println("Modificar tarea");
+        });
+
     }
 
     private void applyStylesToLabel(Label label) {
@@ -152,4 +194,5 @@ public class TaskItem extends HBox {
         label.setStyle("-fx-alignment: center;");
         label.setPrefHeight(USE_COMPUTED_SIZE);
     }
+
 }
