@@ -67,8 +67,6 @@ public class MainController {
         // Esto es para que se actualice la lista de tareas
         // Recorremos la cola de tareas para ir convirtiendo cada tarea a un TaskItem
         for (int i = 0; i < controller.getTasksByDeadLine().size(); i++) {
-            // TODO: Comprobrar si esto funciona(No se si al sacar una tarea y volverla a
-            // meter realmente lo estamos recorriendo)
             Task task = controller.getTasksByDeadLine().poll();
 
             // Cojemos cada tarea y la volvemos un TaskItem(Para asi poderlo mostrar)

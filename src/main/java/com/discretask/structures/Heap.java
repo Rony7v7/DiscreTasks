@@ -1,4 +1,5 @@
 package com.discretask.structures;
+
 import java.util.Comparator;
 import com.discretask.interfaces.IPriorityQueue;
 
@@ -156,5 +157,3 @@ public class Heap<T> implements IPriorityQueue<T> {
     }
 
 }
-
-
