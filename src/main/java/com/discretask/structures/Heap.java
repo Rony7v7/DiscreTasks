@@ -11,22 +11,16 @@ public class Heap<T> implements IPriorityQueue<T> {
 
     private int capacity;
 
+    private final int DEFAULT_SIZE = 11;
+
     private Comparator<T> comparator;
 
     @SuppressWarnings("unchecked")
-    public Heap(int capacity, Comparator<T> comparator) {
-        this.capacity = capacity;
-        this.size = 0;
-        this.heap = (T[]) new Object[capacity];
-        this.comparator = comparator;
-    }
-
-    @SuppressWarnings("unchecked")
     public Heap(Comparator<T> comparator) {
-        this.capacity = 10;
         this.size = 0;
-        this.heap = (T[]) new Object[capacity];
+        this.heap = (T[]) new Object[DEFAULT_SIZE];
         this.comparator = comparator;
+        this.capacity = DEFAULT_SIZE;
     }
 
     @Override
