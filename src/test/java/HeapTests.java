@@ -14,6 +14,127 @@ import com.discretask.structures.Heap;
 
 public class HeapTests {
 
+    private Heap<Task> heap;
+
+    void setUpScenary1() {
+        heap = new Heap<>(new Comparator<Task>() {
+            @Override
+            public int compare(Task o1, Task o2) {
+                return o1.getPriority().compareTo(o2.getPriority());
+            }
+        });
+    }
+
+    void setUpScenary1() {
+        heap = new Heap<>(new Comparator<Task>() {
+            @Override
+            public int compare(Task o1, Task o2) {
+                return o1.getDeadline().compareTo(o2.getDeadline());
+            }
+        });
+    }
+
+    void setUpScenary2() {
+        heap = new Heap<>(new Comparator<Task>() {
+            @Override
+            public int compare(Task o1, Task o2) {
+                return o1.getPriority().compareTo(o2.getPriority());
+            }
+        });
+        Task task1 = new Task("Tarea1", "Contenido", Priority.NON_PRIORITY, "Categoria", Calendar.getInstance());
+        Task task3 = new Task("Tarea3", "Contenido", Priority.NEUTRAL, "Categoria", Calendar.getInstance());
+        Task task2 = new Task("Tarea2", "Contenido", Priority.PRIORITY, "Categoria", Calendar.getInstance());
+        heap.add(task1);
+        heap.add(task2);
+        heap.add(task3);
+    }
+
+    void setUpScenary3() {
+        heap = new Heap<>(new Comparator<Task>() {
+            @Override
+            public int compare(Task o1, Task o2) {
+                return o1.getDeadline().compareTo(o2.getDeadline());
+            }
+        });
+        // Create tasks with different deadlines
+        Calendar now = Calendar.getInstance();
+        Calendar tomorrow = Calendar.getInstance();
+        tomorrow.add(Calendar.DAY_OF_YEAR, 1);
+        Calendar twoDaysLater = Calendar.getInstance();
+        twoDaysLater.add(Calendar.DAY_OF_YEAR, 2);
+        Calendar oneYearLater = Calendar.getInstance();
+        oneYearLater.add(Calendar.YEAR, 1);
+
+        Task task1 = new Task("Task1", "Content1", Priority.NON_PRIORITY, "Category1", tomorrow);
+        Task task2 = new Task("Task2", "Content2", Priority.PRIORITY, "Category2", twoDaysLater);
+        Task task3 = new Task("Task3", "Content3", Priority.NEUTRAL, "Category3", oneYearLater);
+        Task task4 = new Task("Task4", "Content3", Priority.NEUTRAL, "Category3", now);
+
+        // Add tasks to the heap
+        heap.add(task1);
+        heap.add(task2);
+        heap.add(task3);
+        heap.add(task4);
+    }
+
+    void setUpScenary4() {
+        heap = new Heap<>(new Comparator<Task>() {
+            @Override
+            public int compare(Task o1, Task o2) {
+                return o1.getDeadline().compareTo(o2.getDeadline());
+            }
+        });
+        // Create tasks with different deadlines
+        Calendar now = Calendar.getInstance();
+        Calendar tomorrow = Calendar.getInstance();
+        tomorrow.add(Calendar.DAY_OF_YEAR, 1);
+        Calendar twoDaysLater = Calendar.getInstance();
+        twoDaysLater.add(Calendar.DAY_OF_YEAR, 2);
+        Calendar oneYearLater = Calendar.getInstance();
+        oneYearLater.add(Calendar.YEAR, 1);
+
+        Task task1 = new Task("Task1", "Content1", Priority.NON_PRIORITY, "Category1", tomorrow);
+        Task task2 = new Task("Task2", "Content2", Priority.PRIORITY, "Category2", twoDaysLater);
+        Task task3 = new Task("Task3", "Content3", Priority.NEUTRAL, "Category3", oneYearLater);
+        Task task4 = new Task("Task4", "Content3", Priority.NEUTRAL, "Category3", now);
+
+        // Add tasks to the heap
+        heap.add(task1);
+        heap.add(task2);
+        heap.add(task3);
+        heap.add(task4);
+    }
+
+    void setUpScenary5() {
+        heap = new Heap<>(new Comparator<Task>() {
+            @Override
+            public int compare(Task o1, Task o2) {
+                return o1.getDeadline().compareTo(o2.getDeadline());
+            }
+        });
+        // Create tasks with different deadlines
+        Calendar now = Calendar.getInstance();
+        Calendar tomorrow = Calendar.getInstance();
+        tomorrow.add(Calendar.DAY_OF_YEAR, 1);
+        Calendar twoDaysLater = Calendar.getInstance();
+        twoDaysLater.add(Calendar.DAY_OF_YEAR, 2);
+        Calendar oneYearLater = Calendar.getInstance();
+        oneYearLater.add(Calendar.YEAR, 1);
+
+        Task task1 = new Task("Task1", "Content1", Priority.NON_PRIORITY, "Category1", tomorrow);
+        Task task2 = new Task("Task2", "Content2", Priority.PRIORITY, "Category2", twoDaysLater);
+        Task task3 = new Task("Task3", "Content3", Priority.NEUTRAL, "Category3", oneYearLater);
+        Task task4 = new Task("Task4", "Content3", Priority.NEUTRAL, "Category3", now);
+
+        // Add tasks to the heap
+        heap.add(task1);
+        heap.add(task2);
+        heap.add(task3);
+        heap.add(task4);
+    }
+
+
+
     @Test
     public void canHandleTasksByPriority() {
         Heap<Task> heap = new Heap<>(5, new Comparator<Task>() {
