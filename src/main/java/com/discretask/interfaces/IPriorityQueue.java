@@ -2,7 +2,7 @@ package com.discretask.interfaces;
 
 public interface IPriorityQueue<T> {
 
-    public void offer(T item);
+    public void add(T item);
     
     public T poll();
     

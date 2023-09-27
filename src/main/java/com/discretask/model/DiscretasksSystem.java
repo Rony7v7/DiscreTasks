@@ -1,6 +1,7 @@
 package com.discretask.model;
 
 import java.util.Calendar;
+import java.util.Comparator;
 
 import com.discretask.structures.HashTable;
 import com.discretask.structures.Queue;
@@ -19,19 +20,29 @@ public class DiscretasksSystem {
         tasks = new HashTable<String, Task>();
         nonPriorityTasks = new Queue<Task>();
         operationStack = new Stack<DiscretasksSystem>();
-        tasksByDeadLine = new Heap<Task>();
-        priorityTasks = new Heap<Task>();
+        tasksByDeadLine = new Heap<Task>(new Comparator<Task>() {
+            @Override
+            public int compare(Task o1, Task o2) {
+                return o1.getDeadline().compareTo(o2.getDeadline());
+            }
+        });
+        priorityTasks = new Heap<Task>(new Comparator<Task>() {
+            @Override
+            public int compare(Task o1, Task o2) {
+                return o1.getPriority().compareTo(o2.getPriority());
+            }
+        });
     }
 
     // add task
     public void addTask(String title, String content, Priority priority, String userCategory, Calendar deadline) {
         Task task = new Task(title, content, priority, userCategory, deadline);
         tasks.put(title, task);
-        tasksByDeadLine.offer(task);
+        tasksByDeadLine.add(task);
         if (priority == Priority.NON_PRIORITY) {
             nonPriorityTasks.enqueue(task);
         } else if (priority == Priority.PRIORITY) {
-            priorityTasks.offer(task);
+            priorityTasks.add(task);
         }
 
         autoSave();

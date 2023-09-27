@@ -75,7 +75,7 @@ public class MainController {
             TaskItem taskItem = new TaskItem(task);
             taskList.getChildren().add(taskItem);
             VBox.setVgrow(taskItem, Priority.ALWAYS);
-            controller.getTasksByDeadLine().offer(task);
+            controller.getTasksByDeadLine().add(task);
         }
         // Con esto le decimos al ScrollPane que muestre la lista de tareas
         taskViewer.setContent(taskList);
