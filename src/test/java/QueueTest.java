@@ -66,4 +66,12 @@ public class QueueTest {
         setupScenary2();
         assert queue.size() == 3;
     }
+
+    @Test
+    void testRemove() {
+        setupScenary2();
+        queue.remove("Mundo");
+        assert queue.front().equals("Hola");
+    }
+
 }
