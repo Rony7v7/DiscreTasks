@@ -1,7 +1,6 @@
 package com.discretask.ui;
 
 import java.io.IOException;
-import java.lang.reflect.Array;
 
 import com.discretask.Main;
 import com.discretask.model.DiscretasksSystem;

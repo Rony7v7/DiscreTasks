@@ -1,9 +1,7 @@
 package com.discretask.structures;
 
-import java.lang.reflect.Array;
 import java.util.Comparator;
 import com.discretask.interfaces.IPriorityQueue;
-import com.discretask.model.Task;
 
 public class Heap<T> implements IPriorityQueue<T> {
 
