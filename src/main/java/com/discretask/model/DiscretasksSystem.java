@@ -39,11 +39,56 @@ public class DiscretasksSystem {
         Task task = new Task(title, content, priority, userCategory, deadline);
         tasks.put(title, task);
         tasksByDeadLine.add(task);
-        if (priority == Priority.NON_PRIORITY) {
-            nonPriorityTasks.enqueue(task);
-        } else if (priority == Priority.PRIORITY) {
-            priorityTasks.add(task);
-        }
+
+        assignTaskToStructure(task);
+
+        autoSave();
+    }
+
+    public void editTask(String oldTitle, String title, String content, Priority priority, String userCategory, Calendar deadline) {
+        Task task = tasks.get(oldTitle);
+
+        //delete task from old structure
+        if (task.getPriority() == Priority.PRIORITY) priorityTasks.remove(task);
+        else if (task.getPriority() == Priority.NON_PRIORITY) nonPriorityTasks.remove(task);
+    
+        task.setTitle(title);
+        task.setContent(content);
+        task.setPriority(priority);
+        task.setUserCategory(userCategory);
+        task.setDeadline(deadline);
+
+        assignTaskToStructure(task);
+
+        autoSave();
+    }
+
+    public void assignTaskToStructure(Task task) {
+        Priority priority = task.getPriority();
+
+        if (priority == Priority.NON_PRIORITY) nonPriorityTasks.enqueue(task);
+        else if (priority == Priority.PRIORITY) priorityTasks.add(task);
+    }
+
+    // No se si es mejor llamarlo desde el main (depende del javafx) porque desde el
+    // controller tocaria
+    // llamarlo en cada metodo de modificación, incumpliendo con el principio de
+    // responsabilidad única.
+    public void autoSave() {
+        operationStack.push(this);
+    }
+
+    public void undo() {
+        DiscretasksSystem previousState = operationStack.pop();
+        this.tasks = previousState.tasks;
+        this.nonPriorityTasks = previousState.nonPriorityTasks;
+    }
+
+    public void deleteTask(String key) {
+        tasks.remove(key);
+        priorityTasks.remove(tasks.get(key));
+        nonPriorityTasks.remove(tasks.get(key));
+        tasksByDeadLine.remove(tasks.get(key));
 
         autoSave();
     }
@@ -67,30 +112,4 @@ public class DiscretasksSystem {
     public Heap<Task> getTasksByDeadLine() {
         return tasksByDeadLine;
     }
-
-    // edit task
-    public void editTask(String title, String content, Priority priority, String userCategory, Calendar deadline) {
-        Task task = tasks.get(title);
-        task.setContent(content);
-        task.setPriority(priority);
-        task.setUserCategory(userCategory);
-        task.setDeadline(deadline);
-
-        autoSave();
-    }
-
-    // No se si es mejor llamarlo desde el main (depende del javafx) porque desde el
-    // controller tocaria
-    // llamarlo en cada metodo de modificación, incumpliendo con el principio de
-    // responsabilidad única.
-    public void autoSave() {
-        operationStack.push(this);
-    }
-
-    public void undo() {
-        DiscretasksSystem previousState = operationStack.pop();
-        this.tasks = previousState.tasks;
-        this.nonPriorityTasks = previousState.nonPriorityTasks;
-    }
-
 }
