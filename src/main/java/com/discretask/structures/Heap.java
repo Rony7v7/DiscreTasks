@@ -1,4 +1,5 @@
 package com.discretask.structures;
+
 import java.util.Comparator;
 import com.discretask.interfaces.IPriorityQueue;
 
@@ -168,13 +169,14 @@ public class Heap<T> implements IPriorityQueue<T> {
         heap[size - 1] = null;
         size--;
         heapifyDown();
-        return item; 
+        return item;
     }
 
-    public T[] getHeap() {
-        return heap;
+    public void getHeap(T[] result) {
+        if (result.length < size) {
+            throw new IllegalArgumentException("Result array is too small");
+        }
+        System.arraycopy(heap, 0, result, 0, size);
     }
 
 }
-
-
