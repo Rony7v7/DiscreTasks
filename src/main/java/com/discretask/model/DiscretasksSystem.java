@@ -93,4 +93,12 @@ public class DiscretasksSystem {
         this.nonPriorityTasks = previousState.nonPriorityTasks;
     }
 
+    public void deleteTask(String key) {
+        tasks.remove(key);
+        priorityTasks.remove(tasks.get(key));
+        //nonPriorityTasks.remove(tasks.get(key));
+        tasksByDeadLine.remove(tasks.get(key));
+
+        autoSave();
+    }
 }
