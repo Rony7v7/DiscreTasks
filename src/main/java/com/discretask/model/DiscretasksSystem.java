@@ -48,26 +48,6 @@ public class DiscretasksSystem {
         autoSave();
     }
 
-    public Queue<Task> getNonPriorityTasks() {
-        return nonPriorityTasks;
-    }
-
-    public Stack<DiscretasksSystem> getOperationStack() {
-        return operationStack;
-    }
-
-    public Heap<Task> getPriorityTasks() {
-        return priorityTasks;
-    }
-
-    public HashTable<String, Task> getTasks() {
-        return tasks;
-    }
-
-    public Heap<Task> getTasksByDeadLine() {
-        return tasksByDeadLine;
-    }
-
     // edit task
     public void editTask(String title, String content, Priority priority, String userCategory, Calendar deadline) {
         Task task = tasks.get(title);
@@ -100,5 +80,25 @@ public class DiscretasksSystem {
         tasksByDeadLine.remove(tasks.get(key));
 
         autoSave();
+    }
+
+    public Queue<Task> getNonPriorityTasks() {
+        return nonPriorityTasks;
+    }
+
+    public Stack<DiscretasksSystem> getOperationStack() {
+        return operationStack;
+    }
+
+    public Heap<Task> getPriorityTasks() {
+        return priorityTasks;
+    }
+
+    public HashTable<String, Task> getTasks() {
+        return tasks;
+    }
+
+    public Heap<Task> getTasksByDeadLine() {
+        return tasksByDeadLine;
     }
 }
