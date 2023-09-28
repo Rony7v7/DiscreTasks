@@ -133,11 +133,9 @@ public class HeapTests {
         heap.add(task4);
     }
 
-
-
     @Test
     public void canHandleTasksByPriority() {
-        Heap<Task> heap = new Heap<>(5, new Comparator<Task>() {
+        Heap<Task> heap = new Heap<Task>(new Comparator<Task>() {
             @Override
             public int compare(Task o1, Task o2) {
                 return o1.getPriority().compareTo(o2.getPriority());
@@ -155,7 +153,7 @@ public class HeapTests {
 
     @Test
     public void canHandleTasksByDate() {
-        Heap<Task> heap = new Heap<>(5, new Comparator<Task>() {
+        Heap<Task> heap = new Heap<>(new Comparator<Task>() {
             @Override
             public int compare(Task o1, Task o2) {
                 return o1.getDeadline().compareTo(o2.getDeadline());
@@ -246,7 +244,7 @@ public class HeapTests {
 
     @Test
     public void test_heap_resize() {
-        Heap<Integer> heap = new Heap<Integer>(10, Comparator.naturalOrder());
+        Heap<Integer> heap = new Heap<Integer>(Comparator.naturalOrder());
         for (int i = 0; i < 10; i++) {
             heap.add(i);
         }
