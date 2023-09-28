@@ -25,7 +25,7 @@ public class HeapTests {
         });
     }
 
-    void setUpScenary1() {
+    void setUpScenary12() {
         heap = new Heap<>(new Comparator<Task>() {
             @Override
             public int compare(Task o1, Task o2) {
