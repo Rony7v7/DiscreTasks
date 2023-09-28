@@ -109,6 +109,7 @@ public class HashTable<K, V> implements IHashTable<K, V> {
         NodeHashTable<K, V> pointer = table[index];
 
         if (table[index] == null) {
+            System.out.println("The key does not exist in the hash table.");
             return null;
         }
 
@@ -117,6 +118,7 @@ public class HashTable<K, V> implements IHashTable<K, V> {
             while (pointer != null) {
 
                 if (table[index].getKey().equals(key)) {
+                    System.out.println("The value of the key is: " + table[index].getValue());
                     return table[index].getValue();
 
                 } else if (table[index].getNext() != null) {
@@ -126,6 +128,8 @@ public class HashTable<K, V> implements IHashTable<K, V> {
             }
 
         }
+
+        System.out.println("The key does not exist in the hash table. 2");
 
         return null;
     }
@@ -227,8 +231,9 @@ public class HashTable<K, V> implements IHashTable<K, V> {
     /**
      * The function returns an array of keys from a hash table.
      * 
-     * @return The method `keySet()` is returning an array of type `K[]`, which represents the set of keys
-     * in the hash table.
+     * @return The method `keySet()` is returning an array of type `K[]`, which
+     *         represents the set of keys
+     *         in the hash table.
      */
     @SuppressWarnings("unchecked")
     public K[] keySet() {
