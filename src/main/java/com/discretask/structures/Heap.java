@@ -165,7 +165,6 @@ public class Heap<T> implements IPriorityQueue<T> {
 
         T[] temp = heap;
         clear();
-        
         for (int i = 0; i < temp.length; i++) {
             if (temp[i] != null) {
                 add(temp[i]);
