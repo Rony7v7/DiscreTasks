@@ -20,18 +20,8 @@ public class DiscretasksSystem {
         tasks = new HashTable<String, Task>();
         nonPriorityTasks = new Queue<Task>();
         operationStack = new Stack<DiscretasksSystem>();
-        tasksByDeadLine = new Heap<Task>(new Comparator<Task>() {
-            @Override
-            public int compare(Task o1, Task o2) {
-                return o1.getDeadline().compareTo(o2.getDeadline());
-            }
-        });
-        priorityTasks = new Heap<Task>(new Comparator<Task>() {
-            @Override
-            public int compare(Task o1, Task o2) {
-                return o1.getPriority().compareTo(o2.getPriority());
-            }
-        });
+        tasksByDeadLine = new Heap<Task>(new ComparatorDeadLine());
+        priorityTasks = new Heap<Task>(new ComparatorPriority());
     }
 
     // add task
