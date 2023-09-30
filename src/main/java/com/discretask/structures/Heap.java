@@ -131,19 +131,23 @@ public class Heap<T> implements IPriorityQueue<T> {
     }
 
     public T remove(T element) {
-        int index = 0;
         for (int i = 0; i < size; i++) {
             if (heap[i].equals(element)) {
-                index = i;
+                heap[i] = null;
                 break;
             }
         }
-        T item = heap[index];
-        heap[index] = heap[size - 1];
-        heap[size - 1] = null;
-        size--;
-        heapifyDown();
-        return item;
+
+        T[] temp = heap;
+        clear();
+
+        for (int i = 0; i < temp.length; i++) {
+            if (temp[i] != null) {
+                add(temp[i]);
+            }
+        }
+
+        return element;
     }
 
     public void getHeap(T[] result) {

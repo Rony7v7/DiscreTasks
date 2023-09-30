@@ -227,8 +227,9 @@ public class HashTable<K, V> implements IHashTable<K, V> {
     /**
      * The function returns an array of keys from a hash table.
      * 
-     * @return The method `keySet()` is returning an array of type `K[]`, which represents the set of keys
-     * in the hash table.
+     * @return The method `keySet()` is returning an array of type `K[]`, which
+     *         represents the set of keys
+     *         in the hash table.
      */
     @SuppressWarnings("unchecked")
     public K[] keySet() {
