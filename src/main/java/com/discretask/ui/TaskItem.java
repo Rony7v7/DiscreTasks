@@ -65,7 +65,7 @@ public class TaskItem extends HBox {
         setSpacing(10); // Espacio entre los VBox
 
         // Con esto le ponemos un borde al TaskItem
-        setStyle("-fx-border-color: black; -fx-border-width: 2px; -fx-padding: 10px;");
+        setStyle("-fx-border-color: gray; -fx-border-width: 0 0 1px 0; -fx-padding: 10px;");
     }
 
     private VBox buildLeftVbox(Task task) {
