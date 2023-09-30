@@ -1,4 +1,5 @@
 package com.discretask.structures;
+
 import java.util.Comparator;
 import com.discretask.interfaces.IPriorityQueue;
 
@@ -10,22 +11,16 @@ public class Heap<T> implements IPriorityQueue<T> {
 
     private int capacity;
 
+    private final int DEFAULT_SIZE = 11;
+
     private Comparator<T> comparator;
 
     @SuppressWarnings("unchecked")
-    public Heap(int capacity, Comparator<T> comparator) {
-        this.capacity = capacity;
-        this.size = 0;
-        this.heap = (T[]) new Object[capacity];
-        this.comparator = comparator;
-    }
-
-    @SuppressWarnings("unchecked")
     public Heap(Comparator<T> comparator) {
-        this.capacity = 10;
         this.size = 0;
-        this.heap = (T[]) new Object[capacity];
+        this.heap = (T[]) new Object[DEFAULT_SIZE];
         this.comparator = comparator;
+        this.capacity = DEFAULT_SIZE;
     }
 
     @Override
@@ -54,13 +49,6 @@ public class Heap<T> implements IPriorityQueue<T> {
         return item;
     }
 
-    @Override
-    public T peek() {
-        if (size == 0) {
-            return null;
-        }
-        return heap[0];
-    }
 
     @Override
     public boolean isEmpty() {
@@ -174,21 +162,16 @@ public class Heap<T> implements IPriorityQueue<T> {
         return element;
     }
 
-    public T[] getHeap() {
-        return heap;
-    }
-
-    // Heap sort
-    public void sort() {
-        for (int i = size - 1; i > 0; i--) {
-            swap(0, i);
-            size--;
-            heapifyDown();
+    public void getHeap(T[] result) {
+        if (result.length < size) {
+            throw new IllegalArgumentException("Result array is too small");
         }
-        size = heap.length;
+        System.arraycopy(heap, 0, result, 0, size);
     }
-
 
 }
+
+
+
 
 

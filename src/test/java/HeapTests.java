@@ -2,12 +2,9 @@
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import java.util.Calendar;
 import java.util.Comparator;
-
 import org.junit.jupiter.api.Test;
-
 import com.discretask.model.Priority;
 import com.discretask.model.Task;
 import com.discretask.structures.Heap;
