@@ -36,26 +36,6 @@ public class Heap<T> implements IPriorityQueue<T> {
         heapifyUp();
     }
 
-    @Override
-    public T poll() {
-        if (size == 0) {
-            return null;
-        }
-        T item = heap[0];
-        heap[0] = heap[size - 1];
-        heap[size - 1] = null;
-        size--;
-        heapifyDown();
-        return item;
-    }
-
-    @Override
-    public T peek() {
-        if (size == 0) {
-            return null;
-        }
-        return heap[0];
-    }
 
     @Override
     public boolean isEmpty() {
