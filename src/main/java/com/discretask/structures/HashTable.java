@@ -5,21 +5,23 @@ import com.discretask.interfaces.IHashTable;
 public class HashTable<K, V> implements IHashTable<K, V> {
 
     private int size;
-    private int DEFAULT_SIZE;
+    private final int DEFAULT_SIZE = 11;
     private NodeHashTable<K, V> table[];
 
     @SuppressWarnings("unchecked")
     public HashTable() {
         this.size = 0;
-        this.DEFAULT_SIZE = 11;
         this.table = new NodeHashTable[DEFAULT_SIZE];
     }
 
     @SuppressWarnings("unchecked")
     public HashTable(int size) {
         this.size = 0;
-        this.DEFAULT_SIZE = size;
-        this.table = new NodeHashTable[DEFAULT_SIZE];
+        this.table = new NodeHashTable[size];
+    }
+
+    public NodeHashTable<K, V>[] getTable() {
+        return table;
     }
 
     /**
@@ -59,12 +61,14 @@ public class HashTable<K, V> implements IHashTable<K, V> {
     @SuppressWarnings("unchecked")
     public void resize() {
         NodeHashTable<K, V>[] oldTable = table;
-        table = new NodeHashTable[DEFAULT_SIZE * 2];
+        table = new NodeHashTable[oldTable.length * 2];
         size = 0;
 
         for (int i = 0; i < oldTable.length; i++) {
-            if (oldTable[i] != null) {
-                put(oldTable[i].getKey(), oldTable[i].getValue());
+            NodeHashTable<K, V> node = oldTable[i];
+            while (node != null) {
+                put(node.getKey(), node.getValue());
+                node = node.getNext();
             }
         }
     }
@@ -209,7 +213,7 @@ public class HashTable<K, V> implements IHashTable<K, V> {
      */
     @Override
     public int hash(K key) {
-        int index = key.hashCode() % DEFAULT_SIZE;
+        int index = key.hashCode() % table.length;
         return index >= 0 ? index : index * -1;
     }
 
@@ -218,6 +222,28 @@ public class HashTable<K, V> implements IHashTable<K, V> {
     public void clear() {
         size = 0;
         table = new NodeHashTable[DEFAULT_SIZE];
+    }
+
+    /**
+     * The function returns an array of keys from a hash table.
+     * 
+     * @return The method `keySet()` is returning an array of type `K[]`, which
+     *         represents the set of keys
+     *         in the hash table.
+     */
+    @SuppressWarnings("unchecked")
+    public K[] keySet() {
+        K[] keys = (K[]) new Object[size];
+        int index = 0;
+        for (int i = 0; i < table.length; i++) {
+            NodeHashTable<K, V> node = table[i];
+            while (node != null) {
+                keys[index] = node.getKey();
+                index++;
+                node = node.getNext();
+            }
+        }
+        return keys;
     }
 
 }

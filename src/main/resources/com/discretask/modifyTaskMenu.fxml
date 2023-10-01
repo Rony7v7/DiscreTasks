@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="440.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.discretask.ui.addTaskMenuController">
+   <children>
+      <Pane layoutX="45.0" layoutY="14.0" prefHeight="45.0" prefWidth="351.0">
+         <children>
+            <Text layoutX="93.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-text-alignment: center;" text="Modify task" wrappingWidth="165.0">
+               <font>
+                  <Font name="Dubai Regular" size="30.0" />
+               </font>
+            </Text>
+         </children>
+      </Pane>
+      <Pane layoutX="30.0" layoutY="67.0" prefHeight="375.0" prefWidth="374.0">
+         <children>
+            <Text layoutX="14.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="New title" wrappingWidth="83.13671875">
+               <font>
+                  <Font name="Dubai Regular" size="16.0" />
+               </font>
+            </Text>
+            <TextField fx:id="titleInput" layoutX="15.0" layoutY="31.0" prefHeight="25.0" prefWidth="344.0" promptText="Title">
+               <font>
+                  <Font name="Dubai Light" size="12.0" />
+               </font>
+            </TextField>
+            <Text layoutX="14.0" layoutY="84.0" strokeType="OUTSIDE" strokeWidth="0.0" text="New description" wrappingWidth="150.13671875">
+               <font>
+                  <Font name="Dubai Regular" size="16.0" />
+               </font>
+            </Text>
+            <TextArea fx:id="contentInput" layoutX="15.0" layoutY="98.0" prefHeight="54.0" prefWidth="344.0" promptText="Description" />
+            <Text layoutX="14.0" layoutY="179.0" strokeType="OUTSIDE" strokeWidth="0.0" text="New priority" wrappingWidth="83.13671875">
+               <font>
+                  <Font name="Dubai Regular" size="16.0" />
+               </font>
+            </Text>
+            <VBox layoutX="18.0" layoutY="183.0">
+               <children>
+                  <RadioButton mnemonicParsing="false" text="Priority">
+                     <toggleGroup>
+                        <ToggleGroup fx:id="priorityRadio" />
+                     </toggleGroup>
+                     <font>
+                        <Font name="Dubai Regular" size="12.0" />
+                     </font>
+                  </RadioButton>
+                  <RadioButton mnemonicParsing="false" text="Non priority" toggleGroup="$priorityRadio">
+                     <font>
+                        <Font name="Dubai Regular" size="12.0" />
+                     </font>
+                  </RadioButton>
+                  <RadioButton mnemonicParsing="false" text="Neutral" toggleGroup="$priorityRadio">
+                     <font>
+                        <Font name="Dubai Regular" size="12.0" />
+                     </font>
+                  </RadioButton>
+               </children>
+            </VBox>
+            <Text layoutX="14.0" layoutY="269.0" strokeType="OUTSIDE" strokeWidth="0.0" text="New category" wrappingWidth="125.13671875">
+               <font>
+                  <Font name="Dubai Regular" size="16.0" />
+               </font>
+            </Text>
+            <TextField fx:id="categoryInput" layoutX="17.0" layoutY="281.0" prefHeight="25.0" prefWidth="344.0" promptText="Catyegory (ex. Math)">
+               <font>
+                  <Font name="Dubai Regular" size="12.0" />
+               </font>
+            </TextField>
+            <Text layoutX="14.0" layoutY="331.0" strokeType="OUTSIDE" strokeWidth="0.0" text="New deadLine" wrappingWidth="125.13671875">
+               <font>
+                  <Font name="Dubai Regular" size="16.0" />
+               </font>
+            </Text>
+            <DatePicker fx:id="deadLineInput" layoutX="19.0" layoutY="340.0" prefHeight="25.0" prefWidth="165.0" />
+         </children>
+      </Pane>
+      <Button fx:id="submitBTN" layoutX="166.0" layoutY="448.0" mnemonicParsing="false" onAction="#submitTask" prefHeight="30.0" prefWidth="103.0" text="Create Task">
+         <font>
+            <Font name="Dubai Regular" size="12.0" />
+         </font></Button>
+   </children>
+</AnchorPane>

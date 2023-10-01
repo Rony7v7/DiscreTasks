@@ -4,7 +4,7 @@ public interface IQueue<T> {
 
     public void enqueue(T node);
     
-    public void dequeue();
+    public T dequeue();
     
     public T front();
     

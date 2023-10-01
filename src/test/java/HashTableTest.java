@@ -36,7 +36,7 @@ public class HashTableTest {
     @Test
     void testContainsKey() {
         setupScenary2();
-        assert hashTable.containsKey("Hola");
+        assertEquals(true, hashTable.containsKey("key1"));
     }
 
     @Test
@@ -100,9 +100,10 @@ public class HashTableTest {
 
     @Test
     void testResize() {
-        setupScenary2();
-        hashTable.resize();
-        assertEquals(hashTable.size(), 4);
+        HashTable<String, String> hashTable = new HashTable<String, String>(1);
+        hashTable.put("key1", "value1");
+        hashTable.put("key2", "value2");
+        assertEquals(2, hashTable.getTable().length);
     }
 
 }

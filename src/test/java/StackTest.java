@@ -14,9 +14,9 @@ public class StackTest {
 
     void setupStage2() {
         stack = new Stack<String>();
-        stack.push("Hola");
-        stack.push("Mundo");
-        stack.push("!");
+        stack.push("node1");
+        stack.push("node2");
+        stack.push("node3");
     }
 
     @Test
@@ -41,20 +41,20 @@ public class StackTest {
     @Test
     void testPeek() {
         setupStage2();
-        assert stack.peek().equals("!");
+        assert stack.peek().equals("node3");
     }
 
     @Test
     void testPop() {
         setupStage2();
-        assert stack.pop().equals("!");
+        assert stack.pop().equals("node3");
     }
 
     @Test
     void testPush() {
         setupStage1();
-        stack.push("Hola");
-        assert stack.peek().equals("Hola");
+        stack.push("node1");
+        assert stack.peek().equals("node1");
     }
 
     @Test
@@ -66,6 +66,6 @@ public class StackTest {
     @Test
     void testToString() {
         setupStage2();
-        assertEquals("!\nMundo\nHola\n", stack.toString());
+        assertEquals("node3\nnode2\nnode1\n", stack.toString());
     }
 }

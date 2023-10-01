@@ -16,11 +16,14 @@ public class Queue<T> implements IQueue<T>{
     }
 
     @Override
-    public void dequeue() {
-        if(front != null) {
+    public T dequeue() {
+        T data = null;
+        if (front != null) {
+            data = front.getData();
             front = front.getNext();
             size--;
-        }
+        } 
+        return data;
     }
 
     @Override
@@ -63,5 +66,23 @@ public class Queue<T> implements IQueue<T>{
         return size;
     }
 
-
+    public T remove(T node) {
+        Node<T> pointer = front;
+        Node<T> prev = null;
+        T data = null;
+        while (pointer != null && !pointer.getData().equals(node)) {
+            prev = pointer;
+            pointer = pointer.getNext();
+        }
+        if (pointer != null) {
+            data = pointer.getData();
+            if (prev == null) {
+                front = pointer.getNext();
+            } else {
+                prev.setNext(pointer.getNext());
+            }
+            size--;
+        }
+        return data;
+    }
 }

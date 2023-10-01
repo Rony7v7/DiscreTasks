@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="600.0" maxWidth="900.0" minHeight="600.0" minWidth="900.0" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.discretask.ui.MainController">
+    <children>
+      <Pane layoutX="45.0" layoutY="96.0" prefHeight="453.0" prefWidth="186.0" style="-fx-border-style: solid; -fx-border-radius: 5; -fx-border-color: gray;">
+         <children>
+      
+                    <!-- Botón "Add" -->
+              <Button fx:id="addButton" layoutX="18.0" layoutY="14.0" mnemonicParsing="false" onAction="#addTask" prefHeight="17.0" prefWidth="150.0" style="-fx-border-radius: 8px;" text="Add">
+               <font>
+                  <Font name="Dubai Regular" size="14.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Separator layoutX="18.0" layoutY="62.0" prefHeight="3.0" prefWidth="150.0" />
+            <VBox alignment="CENTER_LEFT" layoutX="18.0" layoutY="102.0" nodeOrientation="LEFT_TO_RIGHT">
+               <children>
+            
+                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="See: " wrappingWidth="150.0">
+                        <font>
+                            <Font name="Dubai Regular" size="15.0" />
+                        </font>
+                    </Text>
+            
+                                <!-- RadioButtons -->
+                    <RadioButton fx:id="allRadioBTN" alignment="CENTER_LEFT" mnemonicParsing="false" text="All" toggleGroup="$priorityRadio">
+                        <font>
+                            <Font name="Dubai Regular" size="18.0" />
+                        </font>
+                    </RadioButton>
+                    <RadioButton fx:id="noPriorityRadioBTN" mnemonicParsing="false" prefHeight="27.0" prefWidth="124.0" text="No Priority" toggleGroup="$priorityRadio">
+                        <font>
+                            <Font size="18.0" />
+                        </font>
+                    </RadioButton>
+                    <RadioButton fx:id="priorityRadioBTN" mnemonicParsing="false" prefHeight="27.0" prefWidth="99.0" text="Priority" toggleGroup="$priorityRadio">
+                        <font>
+                            <Font size="18.0" />
+                        </font>
+                    </RadioButton>
+               </children>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </VBox>
+         </children>
+      </Pane>
+
+        <!-- Contenedor de tareas en ScrollPane -->
+        <ScrollPane fx:id="taskViewer" layoutX="246.0" layoutY="96.0" prefHeight="453.0" prefWidth="611.0" style="-fx-border-style: solid; -fx-border-radius: 5; -fx-border-color: gray;">
+            <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="199.0" prefWidth="205.0" />
+            </content>
+        </ScrollPane>
+        <!-- Título -->
+      <Label layoutX="287.0" layoutY="558.0" text="Tarea Integradora I - Computación y estructuras discretas I - David Artunduaga, Juan Jose de la Pava, Rony Ordoñez.">
+         <font>
+            <Font name="Dubai Regular" size="12.0" />
+         </font>
+      </Label>
+      <Text fill="#384d3a" layoutX="45.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" text="DiscreTasks" wrappingWidth="257.0">
+          <font>
+              <Font name="Dubai Regular" size="50.0" />
+          </font>
+      </Text>
+    </children>
+</AnchorPane>
