@@ -9,5 +9,7 @@ public interface IPriorityQueue<T> {
     public int size();
     
     public void clear();
+
+    public T poll();
     
 }
