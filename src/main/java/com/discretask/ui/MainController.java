@@ -68,15 +68,33 @@ public class MainController implements Initializable {
     }
 
     public void updateTaskList() {
+
+        if (allRadioBTN.isSelected()) {
+            Heap<Task> taskHeap = controller.getTasksByDeadLine();
+            Task[] taskArray = new Task[taskHeap.size()];
+            // Se que este metodo es raro, pero es que le tenemos que pasar un arreglo para
+            // que el lo copie
+            taskHeap.getHeap(taskArray);
+            updateTaskList(taskArray);
+        } else if (priorityRadioBTN.isSelected()) {
+            Heap<Task> taskHeap = controller.getPriorityTasks();
+            Task[] taskArray = new Task[taskHeap.size()];
+            // Se que este metodo es raro, pero es que le tenemos que pasar un arreglo para
+            // que el lo copie
+            taskHeap.getHeap(taskArray);
+            updateTaskList(taskArray);
+        } else if (noPriorityRadioBTN.isSelected()) {
+            updateTaskList(controller.getNonPriorityTasks().toArray(Task.class));
+        }
+
+    }
+
+    public void updateTaskList(Task[] taskArray) {
         taskViewer.setContent(null);
 
         VBox taskList = new VBox();// Esto sera lo que tiene nuestro ScrollPane al final, una caja Grande donde
                                    // pondremos nuestros TaskItem
 
-        Heap<Task> taskHeap = controller.getTasksByDeadLine();
-
-        Task[] taskArray = new Task[taskHeap.size()];
-        taskHeap.getHeap(taskArray);
         // Esto es para que se actualice la lista de tareas
         // Recorremos la cola de tareas para ir convirtiendo cada tarea a un TaskItem
         for (int i = 0; i < taskArray.length; i++) {

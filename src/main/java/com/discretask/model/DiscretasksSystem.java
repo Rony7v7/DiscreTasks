@@ -33,7 +33,8 @@ public class DiscretasksSystem {
         autoSave();
     }
 
-    public void editTask(String oldTitle, String title, String content, Priority priority, String userCategory, Calendar deadline) {
+    public void editTask(String oldTitle, String title, String content, Priority priority, String userCategory,
+            Calendar deadline) {
         Task task = tasks.get(oldTitle);
 
         if (task != null) {
@@ -69,7 +70,6 @@ public class DiscretasksSystem {
         else if (priority == Priority.PRIORITY)
             priorityTasks.remove(task);
     }
-
 
     // No se si es mejor llamarlo desde el main (depende del javafx) porque desde el
     // controller tocaria

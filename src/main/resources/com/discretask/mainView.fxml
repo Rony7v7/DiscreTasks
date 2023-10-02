@@ -47,12 +47,12 @@
                         <ToggleGroup fx:id="priorityRadio" />
                      </toggleGroup>
                     </RadioButton>
-                    <RadioButton fx:id="noPriorityRadioBTN" mnemonicParsing="false" onAction="#updateTaskList" prefHeight="27.0" prefWidth="124.0" text="No Priority" toggleGroup="$priorityRadio">
+                    <RadioButton fx:id="priorityRadioBTN" mnemonicParsing="false" onAction="#updateTaskList" prefHeight="27.0" prefWidth="99.0" text="Priority" toggleGroup="$priorityRadio">
                         <font>
                             <Font size="18.0" />
                         </font>
                     </RadioButton>
-                    <RadioButton fx:id="priorityRadioBTN" mnemonicParsing="false" onAction="#updateTaskList" prefHeight="27.0" prefWidth="99.0" text="Priority" toggleGroup="$priorityRadio">
+                    <RadioButton fx:id="noPriorityRadioBTN" mnemonicParsing="false" onAction="#updateTaskList" prefHeight="27.0" prefWidth="124.0" text="No Priority" toggleGroup="$priorityRadio">
                         <font>
                             <Font size="18.0" />
                         </font>
