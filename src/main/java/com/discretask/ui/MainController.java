@@ -1,6 +1,8 @@
 package com.discretask.ui;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
 import com.discretask.Main;
 import com.discretask.model.DiscretasksSystem;
@@ -9,6 +11,7 @@ import com.discretask.structures.Heap;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -18,7 +21,7 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-public class MainController {
+public class MainController implements Initializable {
 
     private DiscretasksSystem controller;
 
@@ -40,6 +43,11 @@ public class MainController {
 
     @FXML
     private ScrollPane taskViewer;
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        allRadioBTN.setSelected(true);
+    }
 
     // This method is to add a taks
     public void addTask() throws IOException {
@@ -94,4 +102,5 @@ public class MainController {
     public DiscretasksSystem getController() {
         return controller;
     }
+
 }

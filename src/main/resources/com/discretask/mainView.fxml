@@ -7,6 +7,7 @@
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
@@ -38,17 +39,20 @@
                     </Text>
             
                                 <!-- RadioButtons -->
-                    <RadioButton fx:id="allRadioBTN" alignment="CENTER_LEFT" mnemonicParsing="false" text="All" toggleGroup="$priorityRadio">
+                    <RadioButton fx:id="allRadioBTN" alignment="CENTER_LEFT" mnemonicParsing="false" onAction="#updateTaskList" text="All">
                         <font>
                             <Font name="Dubai Regular" size="18.0" />
                         </font>
+                     <toggleGroup>
+                        <ToggleGroup fx:id="priorityRadio" />
+                     </toggleGroup>
                     </RadioButton>
-                    <RadioButton fx:id="noPriorityRadioBTN" mnemonicParsing="false" prefHeight="27.0" prefWidth="124.0" text="No Priority" toggleGroup="$priorityRadio">
+                    <RadioButton fx:id="noPriorityRadioBTN" mnemonicParsing="false" onAction="#updateTaskList" prefHeight="27.0" prefWidth="124.0" text="No Priority" toggleGroup="$priorityRadio">
                         <font>
                             <Font size="18.0" />
                         </font>
                     </RadioButton>
-                    <RadioButton fx:id="priorityRadioBTN" mnemonicParsing="false" prefHeight="27.0" prefWidth="99.0" text="Priority" toggleGroup="$priorityRadio">
+                    <RadioButton fx:id="priorityRadioBTN" mnemonicParsing="false" onAction="#updateTaskList" prefHeight="27.0" prefWidth="99.0" text="Priority" toggleGroup="$priorityRadio">
                         <font>
                             <Font size="18.0" />
                         </font>
