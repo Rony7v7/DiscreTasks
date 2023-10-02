@@ -123,10 +123,14 @@ public class TaskItem extends HBox {
     // Este metodo es que segun la prioridad le damos un color al boton
     private Circle priorityCircle(Priority priority) {
         Circle priorityCircle = new Circle(6);
-        if (priority == Priority.PRIORITY) {
+        if (priority == Priority.HIGH_PRIORITY) {
             priorityCircle.setFill(Color.RED);
-        } else if (priority == Priority.NEUTRAL) {
+        } else if(priority == Priority.MEDIUM_PRIORITY) {
             priorityCircle.setFill(Color.ORANGE);
+        } else if (priority == Priority.LOW_PRIORITY) {
+            priorityCircle.setFill(Color.YELLOW);
+        } else if (priority == Priority.OPTIONAL) {
+            priorityCircle.setFill(Color.BLUE);
         } else {
             priorityCircle.setFill(Color.LIGHTGREEN);
         }

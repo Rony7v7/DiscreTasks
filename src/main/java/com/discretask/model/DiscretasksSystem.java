@@ -58,7 +58,8 @@ public class DiscretasksSystem {
 
         if (priority == Priority.NON_PRIORITY)
             nonPriorityTasks.enqueue(task);
-        else if (priority == Priority.PRIORITY)
+        else if (priority == Priority.LOW_PRIORITY || priority == Priority.MEDIUM_PRIORITY
+                || priority == Priority.HIGH_PRIORITY)
             priorityTasks.add(task);
     }
 
@@ -67,7 +68,8 @@ public class DiscretasksSystem {
 
         if (priority == Priority.NON_PRIORITY)
             nonPriorityTasks.remove(task);
-        else if (priority == Priority.PRIORITY)
+        else if (priority == Priority.LOW_PRIORITY || priority == Priority.MEDIUM_PRIORITY
+                || priority == Priority.HIGH_PRIORITY)
             priorityTasks.remove(task);
     }
 
