@@ -5,9 +5,10 @@ import java.util.Calendar;
 import java.util.Date;
 
 import com.discretask.exceptions.invalidDateException;
-import com.discretask.model.DiscretasksSystem;
 import com.discretask.model.Priority;
+import com.discretask.model.Task;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -17,10 +18,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.stage.Stage;
 
-public class addTaskMenuController {
+public class ModifyTaskMenuController {
 
-    private DiscretasksSystem discretasksSystem;
-    private MainController mainController;
+    private Task task;
+    private MainController controller;
     private Stage stage;
 
     @FXML
@@ -36,57 +37,43 @@ public class addTaskMenuController {
     private ToggleGroup priorityRadio;
 
     @FXML
-    private TextField titleInput;
+    private Button submitBTN;
 
     @FXML
-    private Button submitButton;
+    private TextField titleInput;
 
-    // Son metodos para las dependencias usados en el MainController
-    public void setDiscretasksSystem(DiscretasksSystem discretasksSystem) {
-        this.discretasksSystem = discretasksSystem;
-    }
-    // Son metodos para las dependencias usados en el MainController
+    public void fillFields() {
+        categoryInput.setText(this.task.getUserCategory());
+        contentInput.setText(this.task.getContent());
+        deadLineInput
+                .setValue(this.task.getDeadline().toInstant().atZone(java.time.ZoneId.systemDefault()).toLocalDate());
+        titleInput.setText(this.task.getTitle());
+        priorityRadio.selectToggle(priorityRadio.getToggles().get(this.task.getPriority().ordinal()));
+        submitBTN.setText("Modify task");
 
-    public void setStage(Stage stage) {
-        this.stage = stage;
-    }
-
-    public void setMainController(MainController mainController) {
-        this.mainController = mainController;
-    }
-
-    public void initialize() {
-        // Esto es para darle las enumeracion a cada boton
         for (int i = 0; i < 3; i++)
             priorityRadio.getToggles().get(i).setUserData(Priority.values()[i]);
     }
 
-    // Trae las cosas del UI y si hay un error lo muestra
-    public void submitTask() {
-        String title = "";
-        String content = "";
-        Priority priority = null;
-        String userCategory = "";
-        Calendar deadLine = Calendar.getInstance();
-
+    @FXML
+    void submitTask(ActionEvent event) {
         boolean hasError = false;
+        Calendar deadLine = Calendar.getInstance();
+        Priority priority = null;
         try {
+
             LocalDate datePicked = deadLineInput.getValue();
             Date date = java.sql.Date.valueOf(datePicked);
             deadLine.setTime(date);
-            title = titleInput.getText();
-            content = contentInput.getText();
             priority = Priority.valueOf(priorityRadio.getSelectedToggle().getUserData().toString());
-            userCategory = categoryInput.getText();
 
-            if (title.equals("") || userCategory.equals("")) {
+            if (titleInput.getText().equals("") || categoryInput.getText().equals("")) {
                 throw new NullPointerException();
             }
 
             if (datePicked.isBefore(LocalDate.now())) {
                 throw new invalidDateException("The date is before today");
             }
-
         } catch (NullPointerException e) {
             hasError = true;
             showError("Error", "Error", "Please fill all the fields");
@@ -99,19 +86,14 @@ public class addTaskMenuController {
         }
 
         if (!hasError) {
-            discretasksSystem.addTask(title, content, priority, userCategory, deadLine);
-
-            mainController.updateTaskList();
-
+            controller.modifyTask(this.task.getTitle(), titleInput.getText(), contentInput.getText(), priority,
+                    categoryInput.getText(), deadLine);
             if (stage != null) {
                 stage.close();
             }
-
         }
-
     }
 
-    // Metodo auxiliar para mostrar errores con mensajes personalizados
     private void showError(String title, String headerText, String contentText) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle(title);
@@ -119,4 +101,17 @@ public class addTaskMenuController {
         alert.setContentText(contentText);
         alert.showAndWait();
     }
+
+    public void setController(MainController controller) {
+        this.controller = controller;
+    }
+
+    public void setTask(Task task) {
+        this.task = task;
+    }
+
+    public void setStage(Stage stage) {
+        this.stage = stage;
+    }
+
 }
