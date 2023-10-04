@@ -88,6 +88,7 @@ public class Queue<T> implements IQueue<T> {
         return data;
     }
 
+    @SuppressWarnings("unchecked")
     public T[] toArray(Class<T> clazz) {
         T[] array = (T[]) Array.newInstance(clazz, size);
         Node<T> pointer = front;

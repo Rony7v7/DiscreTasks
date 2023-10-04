@@ -3,9 +3,9 @@ package com.discretask.structures;
 // import interfaces.INode;
 
 public class NodeHashTable<K, V> {
-    final K key;
-    final int hash;
-    V value;
+    final private K key;
+    final private int hash;
+    private V value;
 
     NodeHashTable<K, V> next;
 
