@@ -1,9 +1,13 @@
 package com.discretask.model;
 
 public enum Priority {
-    PRIORITY,
+    HIGH_PRIORITY,
 
-    NEUTRAL,
+    MEDIUM_PRIORITY,
+
+    LOW_PRIORITY, 
+
+    OPTIONAL,
 
     NON_PRIORITY,
 }

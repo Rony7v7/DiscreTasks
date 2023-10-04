@@ -59,12 +59,12 @@
                         <Font name="Dubai Regular" size="12.0" />
                      </font>
                   </RadioButton>
-                  <RadioButton mnemonicParsing="false" text="Non priority" toggleGroup="$priorityRadio">
+                  <RadioButton mnemonicParsing="false" text="Neutral" toggleGroup="$priorityRadio">
                      <font>
                         <Font name="Dubai Regular" size="12.0" />
                      </font>
                   </RadioButton>
-                  <RadioButton mnemonicParsing="false" text="Neutral" toggleGroup="$priorityRadio">
+                  <RadioButton mnemonicParsing="false" text="Non priority" toggleGroup="$priorityRadio">
                      <font>
                         <Font name="Dubai Regular" size="12.0" />
                      </font>

@@ -1,8 +1,10 @@
 package com.discretask.structures;
 
+import java.lang.reflect.Array;
+
 import com.discretask.interfaces.IQueue;
 
-public class Queue<T> implements IQueue<T>{
+public class Queue<T> implements IQueue<T> {
 
     private Node<T> front;
     private Node<T> back;
@@ -22,14 +24,14 @@ public class Queue<T> implements IQueue<T>{
             data = front.getData();
             front = front.getNext();
             size--;
-        } 
+        }
         return data;
     }
 
     @Override
     public void enqueue(T node) {
         Node<T> newNode = new Node<T>(node);
-        if(front == null) {
+        if (front == null) {
             front = newNode;
             back = front;
         } else {
@@ -84,5 +86,18 @@ public class Queue<T> implements IQueue<T>{
             size--;
         }
         return data;
+    }
+
+    @SuppressWarnings("unchecked")
+    public T[] toArray(Class<T> clazz) {
+        T[] array = (T[]) Array.newInstance(clazz, size);
+        Node<T> pointer = front;
+        int i = 0;
+        while (pointer != null) {
+            array[i] = pointer.getData();
+            pointer = pointer.getNext();
+            i++;
+        }
+        return array;
     }
 }

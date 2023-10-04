@@ -36,6 +36,19 @@ public class Heap<T> implements IPriorityQueue<T> {
         heapifyUp();
     }
 
+    @Override
+    public T poll() {
+        if (size == 0) {
+            return null;
+        }
+        T item = heap[0];
+        heap[0] = heap[size - 1];
+        heap[size - 1] = null;
+        size--;
+        heapifyDown();
+        return item;
+    }
+
 
     @Override
     public boolean isEmpty() {
@@ -140,7 +153,6 @@ public class Heap<T> implements IPriorityQueue<T> {
 
         T[] temp = heap;
         clear();
-
         for (int i = 0; i < temp.length; i++) {
             if (temp[i] != null) {
                 add(temp[i]);

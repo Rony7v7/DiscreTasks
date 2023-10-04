@@ -1,6 +1,9 @@
 package com.discretask.ui;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.Calendar;
+import java.util.ResourceBundle;
 
 import com.discretask.Main;
 import com.discretask.model.DiscretasksSystem;
@@ -9,6 +12,7 @@ import com.discretask.structures.Heap;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -18,7 +22,7 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-public class MainController {
+public class MainController implements Initializable {
 
     private DiscretasksSystem controller;
 
@@ -41,6 +45,11 @@ public class MainController {
     @FXML
     private ScrollPane taskViewer;
 
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        allRadioBTN.setSelected(true);
+    }
+
     // This method is to add a taks
     public void addTask() throws IOException {
         Stage stage = new Stage();
@@ -60,15 +69,33 @@ public class MainController {
     }
 
     public void updateTaskList() {
+
+        if (allRadioBTN.isSelected()) {
+            Heap<Task> taskHeap = controller.getTasksByDeadLine();
+            Task[] taskArray = new Task[taskHeap.size()];
+            // Se que este metodo es raro, pero es que le tenemos que pasar un arreglo para
+            // que el lo copie
+            taskHeap.getHeap(taskArray);
+            updateTaskList(taskArray);
+        } else if (priorityRadioBTN.isSelected()) {
+            Heap<Task> taskHeap = controller.getPriorityTasks();
+            Task[] taskArray = new Task[taskHeap.size()];
+            // Se que este metodo es raro, pero es que le tenemos que pasar un arreglo para
+            // que el lo copie
+            taskHeap.getHeap(taskArray);
+            updateTaskList(taskArray);
+        } else if (noPriorityRadioBTN.isSelected()) {
+            updateTaskList(controller.getNonPriorityTasks().toArray(Task.class));
+        }
+
+    }
+
+    public void updateTaskList(Task[] taskArray) {
         taskViewer.setContent(null);
 
         VBox taskList = new VBox();// Esto sera lo que tiene nuestro ScrollPane al final, una caja Grande donde
                                    // pondremos nuestros TaskItem
 
-        Heap<Task> taskHeap = controller.getTasksByDeadLine();
-
-        Task[] taskArray = new Task[taskHeap.size()];
-        taskHeap.getHeap(taskArray);
         // Esto es para que se actualice la lista de tareas
         // Recorremos la cola de tareas para ir convirtiendo cada tarea a un TaskItem
         for (int i = 0; i < taskArray.length; i++) {
@@ -86,6 +113,13 @@ public class MainController {
         taskViewer.setFitToWidth(true);
     }
 
+    public void modifyTask(String oldTitle, String title, String content,
+            com.discretask.model.Priority priority, String category,
+            Calendar deadLine) {
+        controller.editTask(oldTitle, title, content, priority, category, deadLine);
+        updateTaskList();
+    }
+
     public void deleteTask(String taskName) {
         controller.deleteTask(taskName);
         updateTaskList();
@@ -94,4 +128,10 @@ public class MainController {
     public DiscretasksSystem getController() {
         return controller;
     }
+
+    public void undo() {
+        controller.undo();
+        updateTaskList();
+    }
+
 }

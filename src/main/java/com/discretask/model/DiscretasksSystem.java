@@ -1,8 +1,6 @@
 package com.discretask.model;
 
 import java.util.Calendar;
-import java.util.Comparator;
-
 import com.discretask.structures.HashTable;
 import com.discretask.structures.Queue;
 import com.discretask.structures.Stack;
@@ -39,21 +37,20 @@ public class DiscretasksSystem {
             Calendar deadline) {
         Task task = tasks.get(oldTitle);
 
-        // delete task from old structure
-        if (task.getPriority() == Priority.PRIORITY)
-            priorityTasks.remove(task);
-        else if (task.getPriority() == Priority.NON_PRIORITY)
-            nonPriorityTasks.remove(task);
+        if (task != null) {
+            // Delete task from its structure
+            removeTaskFromStructure(task);
 
-        task.setTitle(title);
-        task.setContent(content);
-        task.setPriority(priority);
-        task.setUserCategory(userCategory);
-        task.setDeadline(deadline);
+            task.setTitle(title);
+            task.setContent(content);
+            task.setPriority(priority);
+            task.setUserCategory(userCategory);
+            task.setDeadline(deadline);
 
-        assignTaskToStructure(task);
-
-        autoSave();
+            // Add task to its structure
+            assignTaskToStructure(task);
+            autoSave();
+        }
     }
 
     public void assignTaskToStructure(Task task) {
@@ -61,8 +58,19 @@ public class DiscretasksSystem {
 
         if (priority == Priority.NON_PRIORITY)
             nonPriorityTasks.enqueue(task);
-        else if (priority == Priority.PRIORITY)
+        else if (priority == Priority.LOW_PRIORITY || priority == Priority.MEDIUM_PRIORITY
+                || priority == Priority.HIGH_PRIORITY)
             priorityTasks.add(task);
+    }
+
+    public void removeTaskFromStructure(Task task) {
+        Priority priority = task.getPriority();
+
+        if (priority == Priority.NON_PRIORITY)
+            nonPriorityTasks.remove(task);
+        else if (priority == Priority.LOW_PRIORITY || priority == Priority.MEDIUM_PRIORITY
+                || priority == Priority.HIGH_PRIORITY)
+            priorityTasks.remove(task);
     }
 
     // No se si es mejor llamarlo desde el main (depende del javafx) porque desde el
