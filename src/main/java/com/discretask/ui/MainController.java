@@ -129,4 +129,9 @@ public class MainController implements Initializable {
         return controller;
     }
 
+    public void undo() {
+        controller.undo();
+        updateTaskList();
+    }
+
 }
