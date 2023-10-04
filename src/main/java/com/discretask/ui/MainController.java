@@ -2,6 +2,7 @@ package com.discretask.ui;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Calendar;
 import java.util.ResourceBundle;
 
 import com.discretask.Main;
@@ -110,6 +111,13 @@ public class MainController implements Initializable {
 
         // Esto no me acuerdo que hace xd
         taskViewer.setFitToWidth(true);
+    }
+
+    public void modifyTask(String oldTitle, String title, String content,
+            com.discretask.model.Priority priority, String category,
+            Calendar deadLine) {
+        controller.editTask(oldTitle, title, content, priority, category, deadLine);
+        updateTaskList();
     }
 
     public void deleteTask(String taskName) {

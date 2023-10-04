@@ -1,13 +1,18 @@
 package com.discretask.ui;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 
+import com.discretask.Main;
 import com.discretask.model.Priority;
 import com.discretask.model.Task;
 
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.geometry.Side;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Label;
@@ -17,6 +22,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+import javafx.stage.Stage;
 
 /**
  * Esta clase es necesaria para crear la tarea que se vera en la pantalla.
@@ -125,7 +131,7 @@ public class TaskItem extends HBox {
         Circle priorityCircle = new Circle(6);
         if (priority == Priority.HIGH_PRIORITY) {
             priorityCircle.setFill(Color.RED);
-        } else if(priority == Priority.MEDIUM_PRIORITY) {
+        } else if (priority == Priority.MEDIUM_PRIORITY) {
             priorityCircle.setFill(Color.ORANGE);
         } else if (priority == Priority.LOW_PRIORITY) {
             priorityCircle.setFill(Color.YELLOW);
@@ -187,10 +193,34 @@ public class TaskItem extends HBox {
         });
 
         modificarMenuItem.setOnAction(event -> {
-            // Logic to modify the task
-            System.out.println("Modificar tarea");
+            try {
+                openModifyMenu();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         });
 
+    }
+
+    private void openModifyMenu() throws IOException {
+        Stage stage = new Stage();
+        stage.setTitle("Modify Task");
+        // Load the FXML file (Trae el archivo FXML)
+        // TODO: IDK IF THIS IS THE CORRECT WAY TO DO THIS
+        FXMLLoader loader = new FXMLLoader(Main.class.getResource("modifyTaskMenu.fxml"));
+        Parent root = loader.load();
+        stage.setScene(new Scene(root));
+
+        // Esto es necesario para poder acceder a los metodos del controlador
+        ModifyTaskMenuController modifyTaskMenuController = loader.getController();
+        // Esto es para hacer una inyeccion de dependencias (Para que todos esten
+        // instacaiados igual)
+        modifyTaskMenuController.setController(controller);
+        modifyTaskMenuController.setTask(task);
+        // THis is so the fields alredy have something in them.
+        modifyTaskMenuController.fillFields();
+        modifyTaskMenuController.setStage(stage);
+        stage.show();
     }
 
     private void applyStylesToLabel(Label label) {
