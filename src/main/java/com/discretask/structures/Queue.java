@@ -62,7 +62,7 @@ public class Queue<T> implements IQueue<T> {
         back = null;
         size = 0;
     }
-
+    
     @Override
     public int size() {
         return size;

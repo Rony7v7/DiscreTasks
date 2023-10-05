@@ -190,16 +190,16 @@ public class HeapTests {
     @Test
     void testRemove2() {
         setUpScenary3();
-        heap.remove(1);
-        assertEquals(heap.poll(), 2);
+        heap.remove(5);
+        assertEquals(heap.poll(), 1);
     }
 
     // Interesting case
     @Test
     void testRemove3() {
         setUpScenary4();
-        heap.remove(1);
-        assertEquals(heap.poll(), 2);
+        heap.remove(4);
+        assertEquals(heap.poll(), 1);
     }
 
     // --------- TESTS HEAPIFY UP ----------
