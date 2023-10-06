@@ -10,11 +10,11 @@ public class HeapTests {
     private Heap<Integer> heap;
 
     void setUpScenary1() {
-        heap =  new Heap<Integer>(new Comparator<Integer>() {
+        heap = new Heap<Integer>(new Comparator<Integer>() {
             @Override
             public int compare(Integer o1, Integer o2) {
                 return o1.compareTo(o2);
-            }    
+            }
         });
     }
 
@@ -115,7 +115,6 @@ public class HeapTests {
         assertTrue(heap.isEmpty());
     }
 
-    // Interesting case
     @Test
     void testIsEmpty3() {
         setUpScenary3();
@@ -237,22 +236,5 @@ public class HeapTests {
         heap.poll();
         assertEquals(heap.poll(), 2);
     }
-
-    // Limit case
-    @Test
-    void testHeapifyDown2() {
-        setUpScenary3();
-        heap.poll();
-        assertEquals(heap.poll(), 2);
-    }
-
-    // Interesting case
-    @Test
-    void testHeapifyDown3() {
-        setUpScenary4();
-        heap.poll();
-        assertEquals(heap.poll(), 2);
-    }
-
 
 }

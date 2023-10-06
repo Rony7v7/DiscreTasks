@@ -38,7 +38,7 @@ public class QueueTest {
         queue.enqueue("node14");
         queue.enqueue("node15");
     }
-    
+
     // ---------- TESTS ENQUEUE ------------
 
     // Casos base
@@ -100,7 +100,7 @@ public class QueueTest {
     void testRemove1() {
         setupScenary2();
         queue.remove("node2");
-        assert queue.front().equals("n");
+        assertEquals("node1", queue.front());
     }
 
     // Casos límite
@@ -109,7 +109,7 @@ public class QueueTest {
         setupScenary2();
         queue.remove("node2");
         queue.remove("node3");
-        queue.remove("n");
+        queue.remove("node1");
         assertTrue(queue.isEmpty());
     }
 
@@ -139,7 +139,7 @@ public class QueueTest {
     @Test
     void testFront() {
         setupScenary2();
-        assert queue.front().equals("n");
+        assert queue.front().equals("node1");
     }
 
     @Test

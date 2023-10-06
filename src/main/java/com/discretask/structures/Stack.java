@@ -3,26 +3,20 @@ package com.discretask.structures;
 import com.discretask.interfaces.INode;
 import com.discretask.interfaces.IStack;
 
-public class Stack<T> implements IStack<T>{
+public class Stack<T> implements IStack<T> {
 
     private Node<T> top;
     private int size;
 
-    public Stack(){
+    public Stack() {
         top = null;
         size = 0;
     }
 
     @Override
     public void clear() {
-        clear(top);
-        size = 0;
-    }
-
-    public void clear(INode<T> pointer) {
-        if (pointer != null) {
-            clear(pointer.getNext());
-            pointer = null;
+        for (int i = 0; i < size; i++) {
+            pop();
         }
     }
 
@@ -34,45 +28,48 @@ public class Stack<T> implements IStack<T>{
     @Override
     public T pop() {
         T pop = null;
-        if(top != null){
+        if (top != null) {
             T data = top.getData();
             top = top.getNext();
             pop = data;
-            size --;
+            size--;
         }
-        
+
         return pop;
     }
 
     @Override
     public void push(T s) {
+        if (s == null) {
+            throw new NullPointerException();
+        }
         Node<T> newNode = new Node<T>(s);
-        if(top == null){
+        if (top == null) {
             top = newNode;
-        }else{
+        } else {
             Node<T> temp = newNode;
             temp.setNext(top);
             top = temp;
         }
-        size ++;
+        size++;
 
     }
-    
+
     @Override
     public T peek() {
         return top.getData();
     }
-    
+
     @Override
     public int size() {
         return size;
     }
-    
+
     @Override
     public String toString() {
         String str = "";
         Node<T> pointer = top;
-        while(pointer != null){
+        while (pointer != null) {
             str += pointer.getData() + "\n";
             pointer = pointer.getNext();
         }
