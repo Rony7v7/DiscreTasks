@@ -1,6 +1,5 @@
 package com.discretask.structures;
 
-import com.discretask.interfaces.INode;
 import com.discretask.interfaces.IStack;
 
 public class Stack<T> implements IStack<T> {
