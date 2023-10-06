@@ -16,14 +16,14 @@ public class QueueTest {
     }
 
     void setupScenary2() {
-        setupScenary2();
+        setupScenary1();
         queue.enqueue("node1");
         queue.enqueue("node2");
         queue.enqueue("node3");
     }
 
     void setupScenary3() {
-        setupScenary2();
+        setupScenary1();
         queue.enqueue("node1");
         queue.enqueue("node2");
         queue.enqueue("node3");
