@@ -5,7 +5,7 @@ import com.discretask.structures.Heap;
 import org.junit.jupiter.api.Test;
 import java.util.Comparator;
 
-public class HeapTests {
+public class HeapTest {
 
     private Heap<Integer> heap;
 
