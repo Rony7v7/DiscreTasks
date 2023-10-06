@@ -7,6 +7,12 @@
 # BlueJ files
 *.ctxt
 
+# .idea folder
+.idea/
+*.idea
+*.xml
+
+
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
 
@@ -23,4 +29,5 @@
 hs_err_pid*
 replay_pid*
 
+#Ingore the target folder
 target/
