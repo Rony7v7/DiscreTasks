@@ -1,4 +1,6 @@
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
@@ -52,7 +54,7 @@ public class QueueTest {
     // Casos límite
     @Test
     void testEnqueue2() {
-        setupScenary3();
+        setupScenary2();
         queue.enqueue("n");
         assertEquals(queue.back(), "n");
     }
@@ -61,8 +63,9 @@ public class QueueTest {
     @Test
     void testEnqueue3() {
         setupScenary3();
-        queue.enqueue("n");
-        assertEquals(queue.front(), "node1");
+        assertThrows(NullPointerException.class, () -> {
+            queue.enqueue(null);
+        });
     }
 
     // ---------- TESTS DEQUEUE ------------
@@ -91,6 +94,27 @@ public class QueueTest {
         setupScenary2();
         queue.dequeue();
         assertEquals(queue.front(), "node2");
+    }
+    // ---------- TESTS FRONT ------------
+
+    @Test
+    void testFront1() {
+        setupScenary2();
+        assertEquals(queue.front(), "node1");
+    }
+
+    @Test
+    void testFront2() {
+        setupScenary1();
+        assertThrows(NullPointerException.class, () -> {
+            queue.front();
+        });
+    }
+
+    @Test
+    void testFront3() {
+        setupScenary3();
+        assertEquals(queue.front(), "node1");
     }
 
     // ---------- TESTS REMOVE ------------
@@ -146,6 +170,12 @@ public class QueueTest {
     void testIsEmpty() {
         setupScenary1();
         assert queue.isEmpty();
+    }
+
+    @Test
+    void testIsEmpty2() {
+        setupScenary2();
+        assertFalse(queue.isEmpty());
     }
 
     @Test
