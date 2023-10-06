@@ -30,6 +30,9 @@ public class Queue<T> implements IQueue<T> {
 
     @Override
     public void enqueue(T node) {
+        if (node == null) {
+            throw new NullPointerException();
+        }
         Node<T> newNode = new Node<T>(node);
         if (front == null) {
             front = newNode;
@@ -62,7 +65,7 @@ public class Queue<T> implements IQueue<T> {
         back = null;
         size = 0;
     }
-    
+
     @Override
     public int size() {
         return size;

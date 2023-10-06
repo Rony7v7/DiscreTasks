@@ -1,4 +1,6 @@
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
@@ -38,7 +40,7 @@ public class QueueTest {
         queue.enqueue("node14");
         queue.enqueue("node15");
     }
-    
+
     // ---------- TESTS ENQUEUE ------------
 
     // Casos base
@@ -52,7 +54,7 @@ public class QueueTest {
     // Casos límite
     @Test
     void testEnqueue2() {
-        setupScenary3();
+        setupScenary2();
         queue.enqueue("n");
         assertEquals(queue.back(), "n");
     }
@@ -61,8 +63,9 @@ public class QueueTest {
     @Test
     void testEnqueue3() {
         setupScenary3();
-        queue.enqueue("n");
-        assertEquals(queue.front(), "node1");
+        assertThrows(NullPointerException.class, () -> {
+            queue.enqueue(null);
+        });
     }
 
     // ---------- TESTS DEQUEUE ------------
@@ -92,6 +95,27 @@ public class QueueTest {
         queue.dequeue();
         assertEquals(queue.front(), "node2");
     }
+    // ---------- TESTS FRONT ------------
+
+    @Test
+    void testFront1() {
+        setupScenary2();
+        assertEquals(queue.front(), "node1");
+    }
+
+    @Test
+    void testFront2() {
+        setupScenary1();
+        assertThrows(NullPointerException.class, () -> {
+            queue.front();
+        });
+    }
+
+    @Test
+    void testFront3() {
+        setupScenary3();
+        assertEquals(queue.front(), "node1");
+    }
 
     // ---------- TESTS REMOVE ------------
 
@@ -100,7 +124,7 @@ public class QueueTest {
     void testRemove1() {
         setupScenary2();
         queue.remove("node2");
-        assert queue.front().equals("n");
+        assertEquals("node1", queue.front());
     }
 
     // Casos límite
@@ -109,7 +133,7 @@ public class QueueTest {
         setupScenary2();
         queue.remove("node2");
         queue.remove("node3");
-        queue.remove("n");
+        queue.remove("node1");
         assertTrue(queue.isEmpty());
     }
 
@@ -139,13 +163,19 @@ public class QueueTest {
     @Test
     void testFront() {
         setupScenary2();
-        assert queue.front().equals("n");
+        assert queue.front().equals("node1");
     }
 
     @Test
     void testIsEmpty() {
         setupScenary1();
         assert queue.isEmpty();
+    }
+
+    @Test
+    void testIsEmpty2() {
+        setupScenary2();
+        assertFalse(queue.isEmpty());
     }
 
     @Test

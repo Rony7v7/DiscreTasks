@@ -1,4 +1,5 @@
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
@@ -15,45 +16,46 @@ public class HashTableTest {
 
     void setupScenary2() {
         hashTable = new HashTable<String, String>();
-        hashTable.put("key1", "value1");
-        hashTable.put("key2", "value2");
+        hashTable.put("1", "Juan");
     }
 
     void setupScenary3() {
         setupScenary1();
-        hashTable.put("key1", "value1");
-        hashTable.put("key1", "value2");
-        hashTable.put("key1", "value3");
+        hashTable.put("1", "Juan");
+        hashTable.put("2", "Rony");
     }
 
     // --------- TESTS PUT ------------
 
-    //Casos base
+    // Casos base
     @Test
     void testPut() {
         setupScenary1();
-        hashTable.put("key1", "value1");
-        assertEquals(hashTable.get("key1"), "value1");
+        hashTable.put("1", "Juan");
+        assertEquals(hashTable.get("1"), "Juan");
     }
 
-    //casos límite
+    // casos límite
     @Test
     void testPut2() {
-        setupScenary2();
-        hashTable.put("key1", "value3");
-        assertEquals(hashTable.get("key1"), "value3");
+        setupScenary1();
+        hashTable.put("1", "Juan");
+        hashTable.put("2", "Rony");
+        assertEquals(hashTable.get("1"), "Juan");
     }
 
-    //Casos interesantes
+    // Casos interesantes
     @Test
     void testPut3() {
         setupScenary3();
-        assertEquals(hashTable.get("key1"), "value3");
+        assertThrows(NullPointerException.class, () -> {
+            hashTable.put(null, "Rony");
+        });
     }
 
     // -------------- TESTS RESIZE ----------------
 
-    //Casos base
+    // Casos base
     @Test
     void testResize() {
         HashTable<String, String> hashTable = new HashTable<String, String>(1);
@@ -62,7 +64,7 @@ public class HashTableTest {
         assertEquals(2, hashTable.getTable().length);
     }
 
-    //casos límite
+    // casos límite
     @Test
     void testResize2() {
         HashTable<String, String> hashTable = new HashTable<String, String>(1);
@@ -79,7 +81,7 @@ public class HashTableTest {
         assertTrue(hashTable.getTable().length > 10);
     }
 
-    //Casos interesantes
+    // Casos interesantes
     @Test
     void testResize3() {
         HashTable<String, String> hashTable = new HashTable<String, String>(3);
@@ -97,28 +99,27 @@ public class HashTableTest {
         assertTrue(hashTable.containsKey("key5"));
     }
 
-
     // -------------- TESTS CONTAINSKEY ------------
 
-    //Casos base
+    // Casos base
     @Test
     void testContainsKey() {
-        setupScenary2();
-        assertEquals(true, hashTable.containsKey("key1"));
+        setupScenary1();
+        assertEquals(false, hashTable.containsKey("1"));
     }
 
-    //Casos límite
+    // Casos límite
     @Test
     void testContainsKey2() {
         setupScenary2();
-        assertEquals(false, hashTable.containsKey("key3"));
+        assertEquals(true, hashTable.containsKey("1"));
     }
 
-    //Casos interesantes
+    // Casos interesantes
     @Test
     void testContainsKey3() {
-        setupScenary3();
-        assertEquals(true, hashTable.containsKey("key1"));
+        setupScenary2();
+        assertEquals(false, hashTable.containsKey("3"));
     }
 
     @Test
@@ -131,29 +132,50 @@ public class HashTableTest {
 
     // ----------------- TESTS GET ------------------
 
-    //Casos base
+    // Casos base
     @Test
     void testGet() {
-        setupScenary2();
-
-        assertEquals(hashTable.get("key1"), "value1");
+        setupScenary1();
+        assertEquals(hashTable.get("1"), null);
     }
 
-    //Casos límite
+    // Casos límite
     @Test
     void testGet2() {
         setupScenary2();
-        assertEquals(hashTable.get("key3"), null);
+        assertEquals(hashTable.get("1"), "Juan");
     }
 
-
-    //Casos interesantes
+    // Casos interesantes
     @Test
     void testGet3() {
         setupScenary3();
-        assertEquals(hashTable.get("key1"), "value3");
+        assertThrows(NullPointerException.class, () -> {
+            hashTable.get(null);
+        });
     }
 
+    // ----------------- REMOVE TESTS ------------------
+
+    void testRemove1() {
+        setupScenary1();
+        assertEquals(hashTable.remove("1"), null);
+    }
+
+    @Test
+    void testRemove2() {
+        setupScenary2();
+        hashTable.remove("1");
+        assertEquals(0, hashTable.size());
+    }
+
+    @Test
+    void testRemove3() {
+        setupScenary3();
+        assertThrows(NullPointerException.class, () -> {
+            hashTable.remove(null);
+        });
+    }
     // ----------------- OTHER TESTS ------------------
 
     @Test
@@ -166,20 +188,8 @@ public class HashTableTest {
     }
 
     @Test
-    void testRemove1() {
-        setupScenary2();
-        assertEquals(hashTable.remove("key1"), "value1");
-    }
-
-    @Test
-    void testRemove2() {
-        setupScenary3();
-        assertEquals(hashTable.remove("key1"), "value3");
-    }
-
-    @Test
     void testSize1() {
-        setupScenary2();
+        setupScenary3();
         assertEquals(hashTable.size(), 2);
     }
 
@@ -189,6 +199,18 @@ public class HashTableTest {
         assertEquals(hashTable.size(), 0);
     }
 
+    @Test
+    void testClear1() {
+        setupScenary1();
+        hashTable.clear();
+        assertTrue(hashTable.isEmpty());
+    }
 
+    @Test
+    void testClear2() {
+        setupScenary2();
+        hashTable.clear();
+        assertTrue(hashTable.isEmpty());
+    }
 
 }

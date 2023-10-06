@@ -1,4 +1,7 @@
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
@@ -14,9 +17,14 @@ public class StackTest {
 
     void setupStage2() {
         stack = new Stack<String>();
-        stack.push("node1");
-        stack.push("node2");
-        stack.push("node3");
+        stack.push("1");
+    }
+
+    void setupStage3() {
+        stack = new Stack<String>();
+        stack.push("1");
+        stack.push("2");
+        stack.push("3");
     }
 
     // ---------- TESTS PUSH ------------
@@ -25,34 +33,32 @@ public class StackTest {
     @Test
     void testPush1() {
         setupStage1();
-        stack.push("node1");
-        assertEquals(stack.peek(), "node1");
+        stack.push("1");
+        assertEquals(stack.peek(), "1");
     }
 
     // Casos límite
     @Test
     void testPush2() {
         setupStage2();
-        stack.push("node1");
-        stack.push("node4");
-        stack.push("node2");
-        stack.push("node4");
-        stack.push("node0");
-        assertEquals(stack.peek(), "node0");
+        stack.push("2");
+        assertEquals(stack.peek(), "2");
     }
 
     // Casos interesantes
     @Test
     void testPush3() {
-        setupStage2();
-        stack.push("node1");
-        stack.push("node4");
-        stack.push("node2");
-        stack.push("node4");
-        stack.push("node0");
-        assertEquals(stack.pop(), "node0");
-        assertEquals(stack.pop(), "node4");
-        assertEquals(stack.pop(), "node2");
+        setupStage3();
+        stack.push("3");
+        assertEquals(stack.peek(), "3");
+    }
+
+    @Test
+    void testPush4() {
+        setupStage3();
+        assertThrows(NullPointerException.class, () -> {
+            stack.push(null);
+        });
     }
 
     // ---------- TESTS POP ------------
@@ -61,7 +67,7 @@ public class StackTest {
     @Test
     void testPop1() {
         setupStage2();
-        assert stack.pop().equals("node3");
+        assert stack.pop().equals("1");
     }
 
     // Casos límite
@@ -85,6 +91,25 @@ public class StackTest {
         assertEquals(stack.size(), 0);
     }
 
+    @Test
+    void testPop4() {
+        setupStage1();
+        assertNull(stack.pop());
+    }
+
+    @Test
+    void testPop5() {
+        setupStage2();
+        assert stack.pop().equals("1");
+        assertTrue(stack.isEmpty());
+    }
+
+    @Test
+    void testPop6() {
+        setupStage2();
+        assert stack.pop().equals("1");
+    }
+
     // ---------- TESTS ClEAR ------------
 
     // Casos base
@@ -92,9 +117,9 @@ public class StackTest {
     void testClear2() {
         setupStage2();
         stack.clear();
-        assert stack.isEmpty();
+        assertNull(stack.pop());
     }
-    
+
     // Casos límite
     @Test
     void testClear1() {
@@ -111,9 +136,30 @@ public class StackTest {
         stack.clear();
         stack.clear();
         assertEquals(stack.size(), 0);
-    }    
-    
-    
+    }
+
+    // ---------- PEEK TESTS ------------
+
+    @Test
+    void testPeek1() {
+        setupStage1();
+        assertThrows(NullPointerException.class, () -> {
+            stack.peek();
+        });
+    }
+
+    @Test
+    void testPeek2() {
+        setupStage2();
+        assert stack.peek().equals("1");
+    }
+
+    @Test
+    void testPeek3() {
+        setupStage3();
+        assert stack.peek().equals("3");
+    }
+
     // ---------- OTHER TESTS ------------
 
     @Test
@@ -125,18 +171,18 @@ public class StackTest {
     @Test
     void testPeek() {
         setupStage2();
-        assert stack.peek().equals("node3");
+        assert stack.peek().equals("1");
     }
 
     @Test
     void testSize() {
-        setupStage2();
+        setupStage3();
         assertEquals(3, stack.size());
     }
 
     @Test
     void testToString() {
-        setupStage2();
-        assertEquals("node3\nnode2\nnode1\n", stack.toString());
+        setupStage3();
+        assertEquals("3\n2\n1\n", stack.toString());
     }
 }
