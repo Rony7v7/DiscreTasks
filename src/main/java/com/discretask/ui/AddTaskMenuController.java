@@ -124,7 +124,7 @@ public class AddTaskMenuController implements Initializable {
         }
 
         if (!hasError && !isEditing) {
-            discretasksSystem.addTask(title, description, priority, userCategory, deadLine);
+            discretasksSystem.addTask(title, description, priority, userCategory, deadLine, false);
 
             mainController.updateTaskList();
 
@@ -133,7 +133,7 @@ public class AddTaskMenuController implements Initializable {
             }
 
         } else if (!hasError && isEditing) {
-            discretasksSystem.editTask(taskID, title, description, priority, userCategory, deadLine);
+            discretasksSystem.editTask(taskID, title, description, priority, userCategory, deadLine, false);
             mainController.updateTaskList();
             if (stage != null) {
                 stage.close();

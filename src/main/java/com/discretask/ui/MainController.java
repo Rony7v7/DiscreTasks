@@ -109,12 +109,12 @@ public class MainController implements Initializable {
     public void modifyTask(String oldTitle, String title, String content,
             com.discretask.model.Priority priority, String category,
             Calendar deadLine) {
-        controller.editTask(oldTitle, title, content, priority, category, deadLine);
+        controller.editTask(oldTitle, title, content, priority, category, deadLine, false);
         updateTaskList();
     }
 
     public void deleteTask(String taskName) {
-        controller.deleteTask(taskName);
+        controller.deleteTask(taskName, false);
         updateTaskList();
     }
 
