@@ -8,7 +8,6 @@ import java.util.ResourceBundle;
 import com.discretask.Main;
 import com.discretask.model.DiscretasksSystem;
 import com.discretask.model.Task;
-import com.discretask.structures.Heap;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -72,19 +71,10 @@ public class MainController implements Initializable {
     public void updateTaskList() {
 
         if (allRadioBTN.isSelected()) {
-            Heap<Task> taskHeap = controller.getTasksByDeadLine();
-            Task[] taskArray = new Task[taskHeap.size()];
-            // Se que este metodo es raro, pero es que le tenemos que pasar un arreglo para
-            // que el lo copie
-            taskHeap.getHeap(taskArray);
-            updateTaskList(taskArray);
+            updateTaskList(controller.getSortedHeap("DEADLINE"));
         } else if (priorityRadioBTN.isSelected()) {
-            Heap<Task> taskHeap = controller.getPriorityTasks();
-            Task[] taskArray = new Task[taskHeap.size()];
-            // Se que este metodo es raro, pero es que le tenemos que pasar un arreglo para
-            // que el lo copie
-            taskHeap.getHeap(taskArray);
-            updateTaskList(taskArray);
+
+            updateTaskList(controller.getSortedHeap("PRIORITY"));
         } else if (noPriorityRadioBTN.isSelected()) {
             updateTaskList(controller.getNonPriorityTasks().toArray(Task.class));
         }
