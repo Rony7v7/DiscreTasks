@@ -83,11 +83,11 @@ public class DiscretasksSystem {
 
     public void undo() {
         if (!operationStack.isEmpty()){
-        DiscretasksSystem previousState = operationStack.pop();
-        this.tasks = previousState.tasks;
-        this.nonPriorityTasks = previousState.nonPriorityTasks;
-        this.tasksByDeadLine = previousState.tasksByDeadLine;
-        this.priorityTasks = previousState.priorityTasks;
+            DiscretasksSystem previousState = operationStack.pop();
+            this.tasks = previousState.tasks;
+            this.nonPriorityTasks = previousState.nonPriorityTasks;
+            this.tasksByDeadLine = previousState.tasksByDeadLine;
+            this.priorityTasks = previousState.priorityTasks;
         }
     }
 
