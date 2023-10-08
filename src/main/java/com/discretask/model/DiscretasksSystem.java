@@ -39,6 +39,7 @@ public class DiscretasksSystem {
 
         if (task != null) {
             // Delete task from its structure
+            tasks.remove(oldTitle);
             removeTaskFromStructure(task);
 
             task.setTitle(title);
@@ -48,6 +49,7 @@ public class DiscretasksSystem {
             task.setDeadline(deadline);
 
             // Add task to its structure
+            tasks.put(title, task);
             assignTaskToStructure(task);
             autoSave();
         }
