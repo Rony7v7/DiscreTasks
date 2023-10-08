@@ -72,22 +72,23 @@ public class Queue<T> implements IQueue<T> {
     }
 
     public T remove(T node) {
-        Node<T> pointer = front;
-        Node<T> prev = null;
+        Queue<T> aux = new Queue<T>();
         T data = null;
-        while (pointer != null && !pointer.getData().equals(node)) {
-            prev = pointer;
-            pointer = pointer.getNext();
-        }
-        if (pointer != null) {
-            data = pointer.getData();
-            if (prev == null) {
-                front = pointer.getNext();
+
+        while (!this.isEmpty()) {
+            
+            if (this.front() == node) {
+                data = this.dequeue();
             } else {
-                prev.setNext(pointer.getNext());
+                aux.enqueue(this.dequeue());
             }
-            size--;
+
         }
+
+        this.back = aux.back;
+        this.front = aux.front;
+        this.size = aux.size;
+
         return data;
     }
 
