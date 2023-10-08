@@ -29,7 +29,7 @@ public class AddTaskMenuController implements Initializable {
     private DiscretasksSystem discretasksSystem;
     private MainController mainController;
     private Stage stage;
-    private String oldTitleTask = "";
+    private String taskID = "";
     private boolean isEditing = false;
 
     @FXML
@@ -133,7 +133,7 @@ public class AddTaskMenuController implements Initializable {
             }
 
         } else if (!hasError && isEditing) {
-            discretasksSystem.editTask(oldTitleTask, title, description, priority, userCategory, deadLine);
+            discretasksSystem.editTask(taskID, title, description, priority, userCategory, deadLine);
             mainController.updateTaskList();
             if (stage != null) {
                 stage.close();
@@ -151,8 +151,8 @@ public class AddTaskMenuController implements Initializable {
         alert.showAndWait();
     }
 
-    public void setOldTitleTask(String oldTitleTask) {
-        this.oldTitleTask = oldTitleTask;
+    public void setTaskID(String taskID) {
+        this.taskID = taskID;
     }
 
     public void setHeader(String header) {

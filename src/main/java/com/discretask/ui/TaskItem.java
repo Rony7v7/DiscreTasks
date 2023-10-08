@@ -202,7 +202,7 @@ public class TaskItem extends HBox {
 
             // If the user clicks OK, delete the task
             if (result.isPresent() && result.get() == ButtonType.OK) {
-                controller.deleteTask(task.getTitle());
+                controller.deleteTask(task.getId());
             }
         });
 
@@ -237,7 +237,7 @@ public class TaskItem extends HBox {
     private void changeAddTaskMenuToModifyTaskMenu(AddTaskMenuController addTaskMenuController) {
         changeTitles(addTaskMenuController);
         addTaskMenuController.setIsEditing(true);
-        addTaskMenuController.setOldTitleTask(task.getTitle());
+        addTaskMenuController.setTaskID(task.getId());
         addTaskMenuController.setTitleInput(task.getTitle());
         addTaskMenuController.setDescriptionInput(task.getContent());
         addTaskMenuController.setPriorityInput(task.getPriority());
