@@ -78,17 +78,38 @@ public class DiscretasksSystem {
 
 
     public void autoSave() {
-        operationStack.push(this);
+        DiscretasksSystem previousState = new DiscretasksSystem();
+        //deep copy
+        previousState.operationStack = operationStack;
+
+        Object[] taskTable = tasks.values();
+        Task pointer = null;
+
+        System.out.println("AutoSave");
+        for (int i = 0; i < taskTable.length; i++) {
+            pointer = (Task) taskTable[i];
+            Task task = new Task(pointer.getTitle(), pointer.getContent(), pointer.getPriority(),
+                    pointer.getUserCategory(), pointer.getDeadline(), pointer.getId());
+
+            previousState.tasks.put(task.getId(), task);
+            previousState.assignTaskToStructure(task);
+            System.out.println(task.getTitle());
+        }
+
+        operationStack.push(previousState);
+
     }
 
     public void undo() {
-        if (!operationStack.isEmpty()){
+
+        if (!operationStack.isEmpty()) {
             DiscretasksSystem previousState = operationStack.pop();
-            this.tasks = previousState.tasks;
-            this.nonPriorityTasks = previousState.nonPriorityTasks;
-            this.tasksByDeadLine = previousState.tasksByDeadLine;
-            this.priorityTasks = previousState.priorityTasks;
+            tasks = previousState.tasks;
+            nonPriorityTasks = previousState.nonPriorityTasks;
+            tasksByDeadLine = previousState.tasksByDeadLine;
+            priorityTasks = previousState.priorityTasks;
         }
+        
     }
 
     public void deleteTask(String key) {

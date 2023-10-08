@@ -246,4 +246,18 @@ public class HashTable<K, V> implements IHashTable<K, V> {
         return keys;
     }
 
+    @SuppressWarnings("unchecked")
+    public V[] values() {
+        V[] values = (V[]) new Object[size];
+        int index = 0;
+        for (int i = 0; i < table.length; i++) {
+            NodeHashTable<K, V> node = table[i];
+            while (node != null) {
+                values[index] = node.getValue();
+                index++;
+                node = node.getNext();
+            }
+        }
+        return values;
+    }
 }
