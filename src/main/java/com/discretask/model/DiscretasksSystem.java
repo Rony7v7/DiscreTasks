@@ -24,8 +24,8 @@ public class DiscretasksSystem {
 
     // add task
     public void addTask(String title, String content, Priority priority, String userCategory, Calendar deadline) {
-        Task task = new Task(title, content, priority, userCategory, deadline);
-        tasks.put(title+Calendar.getInstance(), task);
+        Task task = new Task(title, content, priority, userCategory, deadline, title+Calendar.getInstance());
+        tasks.put(task.getId(), task);
         tasksByDeadLine.add(task);
 
         assignTaskToStructure(task);

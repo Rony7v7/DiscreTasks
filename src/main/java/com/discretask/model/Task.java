@@ -8,14 +8,15 @@ public class Task {
     private Priority priority;
     private String userCategory;
     private Calendar deadline;
+    private String id;
 
-    public Task(String title, String content, Priority priority, String userCategory, Calendar deadline) {
+    public Task(String title, String content, Priority priority, String userCategory, Calendar deadline, String id) {
         this.title = title;
         this.content = content;
         this.priority = priority;
         this.userCategory = userCategory;
         this.deadline = deadline;
-
+        this.id = id;
     }
 
     public String getTitle() {
@@ -58,4 +59,12 @@ public class Task {
         this.deadline = deadline;
     }
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+    
 }
