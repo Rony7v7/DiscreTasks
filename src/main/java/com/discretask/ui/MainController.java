@@ -29,7 +29,6 @@ public class MainController implements Initializable {
     public MainController() {
         controller = new DiscretasksSystem();
         controller.initSytem();
-        updateTaskList();
     }
 
     @FXML
@@ -50,6 +49,7 @@ public class MainController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         allRadioBTN.setSelected(true);
+        updateTaskList();
     }
 
     // This method is to add a taks

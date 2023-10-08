@@ -87,6 +87,7 @@ public class DiscretasksSystem {
     public void autoSave() {
         DiscretasksSystem previousState = new DiscretasksSystem();
         // deep copy
+        operationStack.pop();
         previousState.operationStack = operationStack;
 
         Object[] taskTable = tasks.values();
