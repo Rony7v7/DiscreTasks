@@ -1,7 +1,5 @@
 package com.discretask.model.CommandPattern;
 
-import java.util.Calendar;
-
 import com.discretask.interfaces.Command;
 import com.discretask.model.DiscretasksSystem;
 import com.discretask.model.Task;
