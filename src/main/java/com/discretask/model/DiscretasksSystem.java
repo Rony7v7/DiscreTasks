@@ -33,24 +33,25 @@ public class DiscretasksSystem {
         autoSave();
     }
 
-    public void editTask(String oldTitle, String title, String content, Priority priority, String userCategory,
+    public void editTask(String id, String title, String content, Priority priority, String userCategory,
             Calendar deadline) {
-        Task task = tasks.get(oldTitle);
+
+        Task task = tasks.remove(id); // Removing task from the hash table because the id is the key
 
         if (task != null) {
-            // Delete task from its structure
-            tasks.remove(oldTitle);
-            removeTaskFromStructure(task);
+            // Delete task from its structure // No se si es necesario
+            // removeTaskFromStructure(task);
 
             task.setTitle(title);
             task.setContent(content);
             task.setPriority(priority);
             task.setUserCategory(userCategory);
             task.setDeadline(deadline);
+            task.setId(title + Calendar.getInstance());
 
             // Add task to its structure
-            tasks.put(title, task);
-            assignTaskToStructure(task);
+            tasks.put(task.getId(), task);
+            // assignTaskToStructure(task);
             autoSave();
         }
     }
