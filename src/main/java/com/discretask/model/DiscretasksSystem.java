@@ -115,4 +115,80 @@ public class DiscretasksSystem {
     public Heap<Task> getTasksByDeadLine() {
         return tasksByDeadLine;
     }
+
+    public Task[] getSortedHeap(String type) {
+
+        Heap<Task> temp;
+        Task[] taskArray = null;
+
+        if (type.equals("DEADLINE")) {
+
+            temp = getTasksByDeadLine();
+            taskArray = new Task[temp.size()];
+            temp.getHeap(taskArray);
+            mergeSort(taskArray, new ComparatorDeadLine());
+
+        } else if (type.equals("PRIORITY")) {
+
+            temp = getPriorityTasks();
+            taskArray = new Task[temp.size()];
+            temp.getHeap(taskArray);
+            mergeSort(taskArray, new ComparatorPriority());
+
+        }
+
+        return taskArray;
+         
+    }
+
+    public void mergeSort(Task[] array, Comparator<Task> comparator) {
+
+        if (array.length > 1) {
+
+            int mid = array.length / 2;
+
+            Task[] left = Arrays.copyOfRange(array, 0, mid);
+            Task[] right = Arrays.copyOfRange(array, mid, array.length);
+
+            mergeSort(left, comparator);
+            mergeSort(right, comparator);
+
+            merge(array, left, right, comparator);
+
+        }
+
+    }
+
+    public void merge(Task[] array, Task[] left, Task[] right, Comparator<Task> comparator) {
+        int i = 0;
+        int j = 0;
+        int k = 0;
+
+        while (i < left.length && j < right.length) {
+
+            if (comparator.compare(left[i], right[j]) < 0) {
+                array[k] = left[i];
+                i++;
+            } else {
+                array[k] = right[j];
+                j++;
+            }
+
+            k++;
+
+        }
+
+        while (i < left.length) {
+            array[k] = left[i];
+            i++;
+            k++;
+        }
+
+        while (j < right.length) {
+            array[k] = right[j];
+            j++;
+            k++;
+        }
+
+    }
 }
