@@ -48,6 +48,8 @@ public class DiscretasksSystem {
         if (task.getUserCategory() != userCategory) task.setUserCategory(userCategory);
         if (task.getDeadline() != deadline) task.setDeadline(deadline);
 
+        tasks.put(task.getId(), task); // Adding the task again to the hash table with the new id
+
         autoSave();
     }
 
