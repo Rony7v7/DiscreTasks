@@ -18,6 +18,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.image.Image;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -54,6 +55,7 @@ public class MainController implements Initializable {
     public void addTask() throws IOException {
         Stage stage = new Stage();
         stage.setTitle("Add Task");
+        stage.getIcons().add(new Image("/com/discretask/img/T.png"));
         // Load the FXML file (Trae el archivo FXML)
         FXMLLoader loader = new FXMLLoader(Main.class.getResource("addTaskMenu.fxml"));
         Parent root = loader.load();

@@ -9,6 +9,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
@@ -26,6 +27,7 @@ public class Main extends Application {
         scene = new Scene(loadFXML("mainView"));
         stage.setTitle("DiscreTasks");
         stage.setScene(scene);
+        stage.getIcons().add(new Image("/com/discretask/img/T.png"));
 
         // Set the key event handler for the scene
         scene.setOnKeyPressed(new EventHandler<KeyEvent>() {

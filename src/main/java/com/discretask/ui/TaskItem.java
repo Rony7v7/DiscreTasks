@@ -20,6 +20,7 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -223,6 +224,7 @@ public class TaskItem extends HBox {
         FXMLLoader loader = new FXMLLoader(Main.class.getResource("addTaskMenu.fxml"));
         Parent root = loader.load();
         stage.setScene(new Scene(root));
+        stage.getIcons().add(new Image("/com/discretask/img/T.png"));
 
         // Esto es necesario para poder acceder a los metodos del controlador
         AddTaskMenuController addTaskMenuController = loader.getController();

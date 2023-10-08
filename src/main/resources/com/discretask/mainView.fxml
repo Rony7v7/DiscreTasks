@@ -20,7 +20,7 @@
          <children>
       
                     <!-- Botón "Add" -->
-              <Button fx:id="addButton" layoutX="18.0" layoutY="14.0" mnemonicParsing="false" onAction="#addTask" prefHeight="17.0" prefWidth="150.0" style="-fx-border-radius: 8px;" text="Add">
+              <Button fx:id="addButton" layoutX="18.0" layoutY="14.0" mnemonicParsing="false" onAction="#addTask" prefHeight="32.0" prefWidth="150.0" style="-fx-border-radius: 8px;" text="Add">
                <font>
                   <Font name="Dubai Regular" size="14.0" />
                </font>
