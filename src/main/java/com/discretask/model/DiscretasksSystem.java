@@ -29,7 +29,6 @@ public class DiscretasksSystem {
     public void addTask(String title, String content, Priority priority, String userCategory, Calendar deadline) {
         Task task = new Task(title, content, priority, userCategory, deadline, title + Calendar.getInstance());
         tasks.put(task.getId(), task);
-        tasksByDeadLine.add(task);
 
         assignTaskToStructure(task);
 
@@ -46,8 +45,13 @@ public class DiscretasksSystem {
             task.setId(title + Calendar.getInstance());
         }
         
+        if (task.getPriority() != priority) {
+            removeTaskFromStructure(task);
+            task.setPriority(priority);
+            assignTaskToStructure(task);
+        }
+        
         if (task.getContent() != content) task.setContent(content);
-        if (task.getPriority() != priority) task.setPriority(priority);
         if (task.getUserCategory() != userCategory) task.setUserCategory(userCategory);
         if (task.getDeadline() != deadline) task.setDeadline(deadline);
 
@@ -58,6 +62,8 @@ public class DiscretasksSystem {
 
     public void assignTaskToStructure(Task task) {
         Priority priority = task.getPriority();
+
+        tasksByDeadLine.add(task);
 
         if (priority == Priority.NON_PRIORITY)
             nonPriorityTasks.enqueue(task);
