@@ -2,6 +2,7 @@ package com.discretask.ui;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.Optional;
 
 import com.discretask.Main;
 import com.discretask.model.Priority;
@@ -13,7 +14,9 @@ import javafx.geometry.Pos;
 import javafx.geometry.Side;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
@@ -189,7 +192,18 @@ public class TaskItem extends HBox {
 
         // Configure actions for the menu items
         eliminarMenuItem.setOnAction(event -> {
-            controller.deleteTask(task.getTitle());
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Confirm Deletion");
+            alert.setHeaderText(null);
+            alert.setContentText("Are you sure you want to delete this task?");
+
+            // Show the confirmation dialog and wait for user's response
+            Optional<ButtonType> result = alert.showAndWait();
+
+            // If the user clicks OK, delete the task
+            if (result.isPresent() && result.get() == ButtonType.OK) {
+                controller.deleteTask(task.getTitle());
+            }
         });
 
         modificarMenuItem.setOnAction(event -> {
