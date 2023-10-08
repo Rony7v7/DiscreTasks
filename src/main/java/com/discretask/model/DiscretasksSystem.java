@@ -97,17 +97,20 @@ public class DiscretasksSystem {
                     pointer.getUserCategory(), pointer.getDeadline(), pointer.getId());
 
             previousState.tasks.put(task.getId(), task);
+            previousState.tasksByDeadLine.add(task);
             previousState.assignTaskToStructure(task);
-            System.out.println(task.getTitle());
         }
 
+        
         operationStack.push(previousState);
+        System.out.println("Operation Stack Size: " + previousState.operationStack.size());
 
     }
 
     public void undo() {
-
+        
         if (!operationStack.isEmpty()) {
+            System.out.println("Valid Undo");
             DiscretasksSystem previousState = operationStack.pop();
             tasks = previousState.tasks;
             nonPriorityTasks = previousState.nonPriorityTasks;
