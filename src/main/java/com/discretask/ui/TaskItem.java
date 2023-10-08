@@ -206,21 +206,39 @@ public class TaskItem extends HBox {
         Stage stage = new Stage();
         stage.setTitle("Modify Task");
         // Load the FXML file (Trae el archivo FXML)
-        // TODO: IDK IF THIS IS THE CORRECT WAY TO DO THIS
-        FXMLLoader loader = new FXMLLoader(Main.class.getResource("modifyTaskMenu.fxml"));
+        FXMLLoader loader = new FXMLLoader(Main.class.getResource("addTaskMenu.fxml"));
         Parent root = loader.load();
         stage.setScene(new Scene(root));
 
         // Esto es necesario para poder acceder a los metodos del controlador
-        ModifyTaskMenuController modifyTaskMenuController = loader.getController();
+        AddTaskMenuController addTaskMenuController = loader.getController();
         // Esto es para hacer una inyeccion de dependencias (Para que todos esten
         // instacaiados igual)
-        modifyTaskMenuController.setController(controller);
-        modifyTaskMenuController.setTask(task);
-        // THis is so the fields alredy have something in them.
-        modifyTaskMenuController.fillFields();
-        modifyTaskMenuController.setStage(stage);
+        addTaskMenuController.setMainController(controller);
+        addTaskMenuController.setStage(stage);
+        changeAddTaskMenuToModifyTaskMenu(addTaskMenuController);
         stage.show();
+    }
+
+    private void changeAddTaskMenuToModifyTaskMenu(AddTaskMenuController addTaskMenuController) {
+        changeTitles(addTaskMenuController);
+        addTaskMenuController.setIsEditing(true);
+        addTaskMenuController.setOldTitleTask(task.getTitle());
+        addTaskMenuController.setTitleInput(task.getTitle());
+        addTaskMenuController.setDescriptionInput(task.getContent());
+        addTaskMenuController.setPriorityInput(task.getPriority());
+        addTaskMenuController.setCategoryInput(task.getUserCategory());
+        addTaskMenuController.setDeadlineInput(task.getDeadline());
+    }
+
+    private void changeTitles(AddTaskMenuController addTaskMenuController) {
+        addTaskMenuController.setHeader("Modify Task");
+        addTaskMenuController.setTitleLabel("New Title");
+        addTaskMenuController.setDescriptionLabel("New Description");
+        addTaskMenuController.setPriorityLabel("New Priority");
+        addTaskMenuController.setCategoryLabel("New Category");
+        addTaskMenuController.setDeadLineLabel("New Deadline");
+        addTaskMenuController.setSubmitBTNText("Modify Task!");
     }
 
     private void applyStylesToLabel(Label label) {

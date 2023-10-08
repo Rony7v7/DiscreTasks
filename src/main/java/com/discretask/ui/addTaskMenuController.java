@@ -1,50 +1,80 @@
 package com.discretask.ui;
 
+import java.net.URL;
+import java.time.Instant;
 import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.ResourceBundle;
 
 import com.discretask.exceptions.invalidDateException;
 import com.discretask.model.DiscretasksSystem;
 import com.discretask.model.Priority;
 
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.control.ToggleGroup;
 import javafx.stage.Stage;
 
-public class addTaskMenuController {
+public class AddTaskMenuController implements Initializable {
 
     private DiscretasksSystem discretasksSystem;
     private MainController mainController;
     private Stage stage;
+    private String oldTitleTask = "";
+    private boolean isEditing = false;
 
     @FXML
     private TextField categoryInput;
 
     @FXML
-    private TextArea contentInput;
+    private Label priorityLabel;
+
+    @FXML
+    private Label categoryLabel;
 
     @FXML
     private DatePicker deadLineInput;
 
     @FXML
-    private ToggleGroup priorityRadio;
+    private Label deadLineLabel;
+
+    @FXML
+    private TextArea descriptionInput;
+
+    @FXML
+    private Label descriptionLabel;
+
+    @FXML
+    private Label header;
+
+    @FXML
+    private ChoiceBox<String> priorityChoiceBox;
+
+    @FXML
+    private Button submitBTN;
 
     @FXML
     private TextField titleInput;
 
     @FXML
-    private Button submitButton;
+    private Label titleLabel;
 
-    // Son metodos para las dependencias usados en el MainController
-    public void setDiscretasksSystem(DiscretasksSystem discretasksSystem) {
-        this.discretasksSystem = discretasksSystem;
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        Priority[] priorities = Priority.values();
+        priorityChoiceBox.getItems().addAll(priorities[0].toString(), priorities[1].toString(),
+                priorities[2].toString(), priorities[3].toString(), priorities[4].toString());
     }
+
     // Son metodos para las dependencias usados en el MainController
 
     public void setStage(Stage stage) {
@@ -53,18 +83,13 @@ public class addTaskMenuController {
 
     public void setMainController(MainController mainController) {
         this.mainController = mainController;
-    }
-
-    public void initialize() {
-        // Esto es para darle las enumeracion a cada boton
-        for (int i = 0; i < 3; i++)
-            priorityRadio.getToggles().get(i).setUserData(Priority.values()[i]);
+        this.discretasksSystem = mainController.getController();
     }
 
     // Trae las cosas del UI y si hay un error lo muestra
     public void submitTask() {
         String title = "";
-        String content = "";
+        String description = "";
         Priority priority = null;
         String userCategory = "";
         Calendar deadLine = Calendar.getInstance();
@@ -75,8 +100,8 @@ public class addTaskMenuController {
             Date date = java.sql.Date.valueOf(datePicked);
             deadLine.setTime(date);
             title = titleInput.getText();
-            content = contentInput.getText();
-            priority = Priority.valueOf(priorityRadio.getSelectedToggle().getUserData().toString());
+            description = descriptionInput.getText();
+            priority = Priority.valueOf(priorityChoiceBox.getValue());
             userCategory = categoryInput.getText();
 
             if (title.equals("") || userCategory.equals("")) {
@@ -98,8 +123,8 @@ public class addTaskMenuController {
             showError("Error", "Error", "An unexpected error has ocurred");
         }
 
-        if (!hasError) {
-            discretasksSystem.addTask(title, content, priority, userCategory, deadLine);
+        if (!hasError && !isEditing) {
+            discretasksSystem.addTask(title, description, priority, userCategory, deadLine);
 
             mainController.updateTaskList();
 
@@ -107,6 +132,12 @@ public class addTaskMenuController {
                 stage.close();
             }
 
+        } else if (!hasError && isEditing) {
+            discretasksSystem.editTask(oldTitleTask, title, description, priority, userCategory, deadLine);
+            mainController.updateTaskList();
+            if (stage != null) {
+                stage.close();
+            }
         }
 
     }
@@ -119,4 +150,64 @@ public class addTaskMenuController {
         alert.setContentText(contentText);
         alert.showAndWait();
     }
+
+    public void setOldTitleTask(String oldTitleTask) {
+        this.oldTitleTask = oldTitleTask;
+    }
+
+    public void setHeader(String header) {
+        this.header.setText(header);
+    }
+
+    public void setTitleLabel(String titleLabel) {
+        this.titleLabel.setText(titleLabel);
+    }
+
+    public void setDescriptionLabel(String descriptionLabel) {
+        this.descriptionLabel.setText(descriptionLabel);
+    }
+
+    public void setPriorityLabel(String priorityLabel) {
+        this.priorityLabel.setText(priorityLabel);
+    }
+
+    public void setDeadLineLabel(String deadLineLabel) {
+        this.deadLineLabel.setText(deadLineLabel);
+    }
+
+    public void setCategoryLabel(String categoryLabel) {
+        this.categoryLabel.setText(categoryLabel);
+    }
+
+    public void setTitleInput(String text) {
+        this.titleInput.setText(text);
+    }
+
+    public void setDescriptionInput(String text) {
+        this.descriptionInput.setText(text);
+    }
+
+    public void setPriorityInput(Priority priority) {
+        this.priorityChoiceBox.setValue(priority.toString());
+    }
+
+    public void setCategoryInput(String text) {
+        this.categoryInput.setText(text);
+    }
+
+    public void setSubmitBTNText(String text) {
+        this.submitBTN.setText(text);
+    }
+
+    public void setIsEditing(boolean isEditing) {
+        this.isEditing = isEditing;
+    }
+
+    public void setDeadlineInput(Calendar deadline) {
+        Instant instant = deadline.toInstant();
+        ZonedDateTime zdt = instant.atZone(ZoneId.systemDefault());
+        LocalDate localDate = zdt.toLocalDate();
+        this.deadLineInput.setValue(localDate);
+    }
+
 }

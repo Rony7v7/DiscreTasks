@@ -58,11 +58,10 @@ public class MainController implements Initializable {
         FXMLLoader loader = new FXMLLoader(Main.class.getResource("addTaskMenu.fxml"));
         Parent root = loader.load();
         // Esto es necesario para poder acceder a los metodos del controlador
-        addTaskMenuController addTaskController = loader.getController();
+        AddTaskMenuController addTaskController = loader.getController();
         stage.setScene(new Scene(root));
         // Esto es para hacer una inyeccion de dependencias (Para que todos esten
         // instacaiados igual)
-        addTaskController.setDiscretasksSystem(controller); // Inject the system
         addTaskController.setStage(stage);
         addTaskController.setMainController(this);
         stage.show();
