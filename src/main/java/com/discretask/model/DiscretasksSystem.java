@@ -45,16 +45,19 @@ public class DiscretasksSystem {
             task.setTitle(title);
             task.setId(title + Calendar.getInstance());
         }
-        
+
         if (task.getPriority() != priority) {
             removeTaskFromStructure(task);
             task.setPriority(priority);
             assignTaskToStructure(task);
         }
-        
-        if (task.getContent() != content) task.setContent(content);
-        if (task.getUserCategory() != userCategory) task.setUserCategory(userCategory);
-        if (task.getDeadline() != deadline) task.setDeadline(deadline);
+
+        if (task.getContent() != content)
+            task.setContent(content);
+        if (task.getUserCategory() != userCategory)
+            task.setUserCategory(userCategory);
+        if (task.getDeadline() != deadline)
+            task.setDeadline(deadline);
 
         tasks.put(task.getId(), task); // Adding the task again to the hash table with the new id
 
@@ -81,10 +84,9 @@ public class DiscretasksSystem {
             priorityTasks.remove(task);
     }
 
-
     public void autoSave() {
         DiscretasksSystem previousState = new DiscretasksSystem();
-        //deep copy
+        // deep copy
         previousState.operationStack = operationStack;
 
         Object[] taskTable = tasks.values();
@@ -101,14 +103,13 @@ public class DiscretasksSystem {
             previousState.assignTaskToStructure(task);
         }
 
-        
         operationStack.push(previousState);
         System.out.println("Operation Stack Size: " + previousState.operationStack.size());
 
     }
 
     public void undo() {
-        
+
         if (!operationStack.isEmpty()) {
             System.out.println("Valid Undo");
             DiscretasksSystem previousState = operationStack.pop();
@@ -117,7 +118,7 @@ public class DiscretasksSystem {
             tasksByDeadLine = previousState.tasksByDeadLine;
             priorityTasks = previousState.priorityTasks;
         }
-        
+
     }
 
     public void deleteTask(String key) {
@@ -171,7 +172,7 @@ public class DiscretasksSystem {
         }
 
         return taskArray;
-         
+
     }
 
     public void mergeSort(Task[] array, Comparator<Task> comparator) {
@@ -223,5 +224,23 @@ public class DiscretasksSystem {
             k++;
         }
 
+    }
+
+    public void initSytem() {
+        Calendar today = Calendar.getInstance();
+        Calendar tomorrow = Calendar.getInstance();
+        Calendar inTwoDays = Calendar.getInstance();
+        Calendar nextWeek = Calendar.getInstance();
+        Calendar nextMonth = Calendar.getInstance();
+        tomorrow.add(Calendar.DAY_OF_MONTH, 1);
+        inTwoDays.add(Calendar.DAY_OF_MONTH, -1);
+        nextWeek.add(Calendar.DAY_OF_MONTH, 7);
+        nextMonth.add(Calendar.MONTH, 1);
+
+        addTask("Tarea1", "Descripcion 1", Priority.HIGH_PRIORITY, "Test 1", today);
+        addTask("Tarea2", "Descripcion 2", Priority.LOW_PRIORITY, "Test 2", tomorrow);
+        addTask("Tarea3", "Descripcion 3", Priority.MEDIUM_PRIORITY, "Test 3", inTwoDays);
+        addTask("Tarea4", "Descripcion 4", Priority.NON_PRIORITY, "Test 4", nextWeek);
+        addTask("Tarea5", "Descripcion 5", Priority.OPTIONAL, "Test 5", nextMonth);
     }
 }

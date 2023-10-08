@@ -28,6 +28,8 @@ public class MainController implements Initializable {
 
     public MainController() {
         controller = new DiscretasksSystem();
+        controller.initSytem();
+        updateTaskList();
     }
 
     @FXML
