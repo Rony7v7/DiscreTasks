@@ -222,8 +222,8 @@ public class TaskItem extends HBox {
 
     private void changeAddTaskMenuToModifyTaskMenu(AddTaskMenuController addTaskMenuController) {
         changeTitles(addTaskMenuController);
-        addTaskMenuController.setIsEditing(true);
         addTaskMenuController.setOldTitleTask(task.getTitle());
+        addTaskMenuController.setIsEditing(true);
         addTaskMenuController.setTitleInput(task.getTitle());
         addTaskMenuController.setDescriptionInput(task.getContent());
         addTaskMenuController.setPriorityInput(task.getPriority());
