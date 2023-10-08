@@ -79,10 +79,10 @@ public class Heap<T> implements IPriorityQueue<T> {
         int index = 0;
         while (hasLeftChild(index)) {
             int smallerChildIndex = getLeftChildIndex(index);
-            if (hasRightChild(index) && comparator.compare(rightChild(index), leftChild(index)) < 0) {
+            if (hasRightChild(index) && comparator.compare(rightChild(index), leftChild(index)) > 0) {
                 smallerChildIndex = getRightChildIndex(index);
             }
-            if (comparator.compare(heap[index], heap[smallerChildIndex]) < 0) {
+            if (comparator.compare(heap[index], heap[smallerChildIndex]) > 0) {
                 break;
             } else {
                 swap(index, smallerChildIndex);
