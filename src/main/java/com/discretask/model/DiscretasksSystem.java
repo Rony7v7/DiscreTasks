@@ -21,6 +21,7 @@ public class DiscretasksSystem {
         tasks = new HashTable<String, Task>();
         nonPriorityTasks = new Queue<Task>();
         operationStack = new Stack<DiscretasksSystem>();
+        operationStack.push(this);
         tasksByDeadLine = new Heap<Task>(new ComparatorDeadLine());
         priorityTasks = new Heap<Task>(new ComparatorPriority());
     }
@@ -87,7 +88,6 @@ public class DiscretasksSystem {
     public void autoSave() {
         DiscretasksSystem previousState = new DiscretasksSystem();
         // deep copy
-        operationStack.pop();
         previousState.operationStack = operationStack;
 
         Object[] taskTable = tasks.values();
@@ -110,14 +110,15 @@ public class DiscretasksSystem {
     }
 
     public void undo() {
-
         if (!operationStack.isEmpty()) {
+            operationStack.pop();
+            DiscretasksSystem previousState = operationStack.peek();
             System.out.println("Valid Undo");
-            DiscretasksSystem previousState = operationStack.pop();
             tasks = previousState.tasks;
             nonPriorityTasks = previousState.nonPriorityTasks;
             tasksByDeadLine = previousState.tasksByDeadLine;
             priorityTasks = previousState.priorityTasks;
+
         }
 
     }
