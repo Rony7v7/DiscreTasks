@@ -19,7 +19,6 @@ public class DeleteTaskCommand implements Command {
 
     @Override
     public void undo(DiscretasksSystem discretasksSystem) {
-        discretasksSystem.addTask(task.getTitle(), task.getContent(), task.getPriority(), task.getUserCategory(),
-                task.getDeadline(), true);
+        discretasksSystem.addTaskUndo(task);
     }
 }

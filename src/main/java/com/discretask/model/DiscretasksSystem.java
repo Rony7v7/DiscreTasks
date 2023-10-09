@@ -30,16 +30,23 @@ public class DiscretasksSystem {
     }
 
     // add task
-    public Task addTask(String title, String content, Priority priority, String userCategory, Calendar deadline,
-            boolean undo) {
+    public Task addTask(String title, String content, Priority priority, String userCategory, Calendar deadline) {
         Task task = new Task(title, content, priority, userCategory, deadline, title + Calendar.getInstance());
         tasks.put(task.getId(), task);
 
         tasksByDeadLine.add(task);
         assignTaskToStructure(task);
-        if (!undo) {
-            operationStack.push(new AddTaskCommand(task));
-        }
+        operationStack.push(new AddTaskCommand(task));
+
+        return task;
+
+    }
+
+    public Task addTaskUndo(Task task) {
+        tasks.put(task.getId(), task);
+
+        tasksByDeadLine.add(task);
+        assignTaskToStructure(task);
         return task;
 
     }
@@ -104,11 +111,13 @@ public class DiscretasksSystem {
     public void undo() {
         if (!operationStack.isEmpty()) {
             Command command = operationStack.pop();
+            System.out.println("Undoing operation: " + command.getClass().getSimpleName());
             command.undo(this);
         }
     }
 
     public void deleteTask(String key, boolean undo) {
+        System.out.println(key);
         Task task = tasks.get(key);
         if (!undo) {
             operationStack.push(new DeleteTaskCommand(task));
@@ -225,10 +234,10 @@ public class DiscretasksSystem {
         nextWeek.add(Calendar.DAY_OF_MONTH, 7);
         nextMonth.add(Calendar.MONTH, 1);
 
-        addTask("Tarea1", "Descripcion 1", Priority.HIGH_PRIORITY, "Test 1", today, false);
-        addTask("Tarea2", "Descripcion 2", Priority.LOW_PRIORITY, "Test 2", tomorrow, false);
-        addTask("Tarea3", "Descripcion 3", Priority.MEDIUM_PRIORITY, "Test 3", inTwoDays, false);
-        addTask("Tarea4", "Descripcion 4", Priority.NON_PRIORITY, "Test 4", nextWeek, false);
-        addTask("Tarea5", "Descripcion 5", Priority.OPTIONAL, "Test 5", nextMonth, false);
+        addTask("Tarea1", "Descripcion 1", Priority.HIGH_PRIORITY, "Test 1", today);
+        addTask("Tarea2", "Descripcion 2", Priority.LOW_PRIORITY, "Test 2", tomorrow);
+        addTask("Tarea3", "Descripcion 3", Priority.MEDIUM_PRIORITY, "Test 3", inTwoDays);
+        addTask("Tarea4", "Descripcion 4", Priority.NON_PRIORITY, "Test 4", nextWeek);
+        addTask("Tarea5", "Descripcion 5", Priority.OPTIONAL, "Test 5", nextMonth);
     }
 }

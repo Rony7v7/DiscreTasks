@@ -104,27 +104,14 @@ public class HashTable<K, V> implements IHashTable<K, V> {
      */
     @Override
     public V get(K key) {
-
         int index = hash(key);
         NodeHashTable<K, V> pointer = table[index];
 
-        if (table[index] == null) {
-            return null;
-        }
-
-        for (int i = 0; i < table.length; i++) {
-
-            while (pointer != null) {
-
-                if (table[index].getKey().equals(key)) {
-                    return table[index].getValue();
-
-                } else if (table[index].getNext() != null) {
-                    pointer = pointer.getNext();
-                }
-
+        while (pointer != null) {
+            if (pointer.getKey().equals(key)) {
+                return pointer.getValue();
             }
-
+            pointer = pointer.getNext();
         }
 
         return null;
@@ -147,11 +134,7 @@ public class HashTable<K, V> implements IHashTable<K, V> {
         int index = hash(key);
         NodeHashTable<K, V> toRemove = null;
 
-        if (key == null) {
-            return null;
-        }
-
-        if (table[index] == null) {
+        if (key == null || table[index] == null) {
             return null;
         }
 
@@ -169,8 +152,12 @@ public class HashTable<K, V> implements IHashTable<K, V> {
             }
         }
 
-        size--;
-        return toRemove.getValue();
+        if (toRemove != null) {
+            size--;
+            return toRemove.getValue();
+        } else {
+            return null;
+        }
     }
 
     /**

@@ -15,7 +15,7 @@ public class AddTaskCommand implements Command {
     @Override
     public void execute(DiscretasksSystem discretasksSystem) {
         discretasksSystem.addTask(task.getTitle(), task.getContent(), task.getPriority(), task.getUserCategory(),
-                task.getDeadline(), true);
+                task.getDeadline());
     }
 
     @Override

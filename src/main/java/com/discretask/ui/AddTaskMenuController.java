@@ -124,7 +124,7 @@ public class AddTaskMenuController implements Initializable {
         }
 
         if (!hasError && !isEditing) {
-            discretasksSystem.addTask(title, description, priority, userCategory, deadLine, false);
+            discretasksSystem.addTask(title, description, priority, userCategory, deadLine);
 
             mainController.updateTaskList();
 
