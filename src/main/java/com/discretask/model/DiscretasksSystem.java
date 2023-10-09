@@ -111,13 +111,11 @@ public class DiscretasksSystem {
     public void undo() {
         if (!operationStack.isEmpty()) {
             Command command = operationStack.pop();
-            System.out.println("Undoing operation: " + command.getClass().getSimpleName());
             command.undo(this);
         }
     }
 
     public void deleteTask(String key, boolean undo) {
-        System.out.println(key);
         Task task = tasks.get(key);
         if (!undo) {
             operationStack.push(new DeleteTaskCommand(task));

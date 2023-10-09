@@ -29,13 +29,10 @@ public class Main extends Application {
         stage.setScene(scene);
         stage.getIcons().add(new Image("/com/discretask/img/T.png"));
 
-        // Set the key event handler for the scene
         scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent event) {
                 if (event.isControlDown() && event.getCode() == KeyCode.Z) {
-                    // Ctrl+Z is pressed, call your method here
-                    System.out.println("Ctrl+Z is pressed");
                     mainController.undo();
                 }
             }
