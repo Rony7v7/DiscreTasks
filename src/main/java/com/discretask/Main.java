@@ -38,6 +38,8 @@ public class Main extends Application {
             }
         });
 
+        scene.getStylesheets().add("/com/discretask/style.css");
+
         stage.show();
     }
 

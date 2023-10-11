@@ -14,9 +14,9 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="600.0" maxWidth="900.0" minHeight="600.0" minWidth="900.0" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.discretask.ui.MainController">
+<AnchorPane maxHeight="600.0" maxWidth="900.0" minHeight="600.0" minWidth="900.0" prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: #ff66cc;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.discretask.ui.MainController">
     <children>
-      <Pane layoutX="45.0" layoutY="96.0" prefHeight="453.0" prefWidth="186.0" style="-fx-border-style: solid; -fx-border-radius: 5; -fx-border-color: gray;">
+      <Pane layoutX="45.0" layoutY="96.0" prefHeight="453.0" prefWidth="186.0" style="-fx-border-style: solid; -fx-border-radius: 5; -fx-border-color: gray; -fx-background-color: #CAE9F4;">
          <children>
       
                     <!-- Botón "Add" -->
@@ -28,8 +28,8 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Separator layoutX="18.0" layoutY="62.0" prefHeight="3.0" prefWidth="150.0" />
-            <VBox alignment="CENTER_LEFT" layoutX="18.0" layoutY="102.0" nodeOrientation="LEFT_TO_RIGHT">
+            <Separator layoutX="18.0" layoutY="89.0" prefHeight="3.0" prefWidth="150.0" />
+            <VBox alignment="CENTER_LEFT" layoutX="18.0" layoutY="136.0" nodeOrientation="LEFT_TO_RIGHT">
                <children>
             
                     <Text strokeType="OUTSIDE" strokeWidth="0.0" text="See: " wrappingWidth="150.0">
@@ -66,20 +66,16 @@
       </Pane>
 
         <!-- Contenedor de tareas en ScrollPane -->
-        <ScrollPane fx:id="taskViewer" layoutX="246.0" layoutY="96.0" prefHeight="453.0" prefWidth="611.0" style="-fx-border-style: solid; -fx-border-radius: 5; -fx-border-color: gray;">
-            <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="199.0" prefWidth="205.0" />
-            </content>
-        </ScrollPane>
+        <ScrollPane fx:id="taskViewer" layoutX="246.0" layoutY="96.0" prefHeight="453.0" prefWidth="611.0" style="-fx-border-style: solid; -fx-border-radius: 5; -fx-border-color: gray; -fx-background-color: #CAE9F4;" />
         <!-- Título -->
       <Label layoutX="287.0" layoutY="558.0" text="Tarea Integradora I - Computación y estructuras discretas I - David Artunduaga, Juan Jose de la Pava, Rony Ordoñez.">
          <font>
             <Font name="Dubai Regular" size="12.0" />
          </font>
       </Label>
-      <Text fill="#384d3a" layoutX="35.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" text="DiscreTasks" wrappingWidth="831.0">
+      <Text fill="#ff7f5a" layoutX="35.0" layoutY="69.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-text-alignment: center;" text="DiscreTasks" wrappingWidth="831.0">
           <font>
-              <Font name="Dubai Regular" size="50.0" />
+              <Font name="Meiryo" size="50.0" />
           </font>
       </Text>
       <Label layoutX="45.0" layoutY="560.0" style="-fx-font-weight: 700;" text="You can use ctrl+z to undo">

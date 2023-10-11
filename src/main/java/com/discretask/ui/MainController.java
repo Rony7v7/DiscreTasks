@@ -12,6 +12,7 @@ import com.discretask.model.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -49,6 +50,7 @@ public class MainController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         allRadioBTN.setSelected(true);
+        addButton.setId("addButton");
         updateTaskList();
     }
 
@@ -95,14 +97,15 @@ public class MainController implements Initializable {
             Task task = taskArray[i];
             // Cojemos cada tarea y la volvemos un TaskItem(Para asi poderlo mostrar)
             TaskItem taskItem = new TaskItem(task, this);
+
             taskList.getChildren().add(taskItem);
             VBox.setVgrow(taskItem, Priority.ALWAYS);
+            VBox.setMargin(taskItem, new Insets(10, 5, 0, 5));
         }
-
+        taskList.setStyle(" -fx-border-radius: 5px;");
         // Con esto le decimos al ScrollPane que muestre la lista de tareas
         taskViewer.setContent(taskList);
 
-        // Esto no me acuerdo que hace xd
         taskViewer.setFitToWidth(true);
     }
 
