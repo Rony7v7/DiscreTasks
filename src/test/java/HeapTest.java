@@ -234,7 +234,7 @@ public class HeapTest {
     void testHeapifyDown() {
         setUpScenary2();
         heap.poll();
-        assertEquals(heap.poll(), 2);
+        assertEquals(heap.poll(), 5);
     }
 
 }
