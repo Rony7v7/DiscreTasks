@@ -52,3 +52,7 @@ Once you run this commands maven will start downloading the dependencies and the
 ## Documentation:
 
 In the project you will find a folder called `DOCS` where you can find the documentation of the project. Like the UML diagrams, algorithm analysis, or the requierements document.
+
+---
+
+![Alt text](src/main/resources/com/discretask/img/ApplicationSample.png)
