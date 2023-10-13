@@ -1,6 +1,6 @@
 # Discretasks
 
-This project was created as school project for the course "Computacion y estructuras discretas" at the University of Icesi, Colombia. 
+This project was created as school project for the course "Computación y estructuras discretas" at the University of Icesi, Colombia. 
 
 By: 
 
@@ -45,7 +45,7 @@ If you don't have maven installed in your computer: `mvnw clean javafx:run`
 
      *In some cases to run the maven wraper you will need to run `.\mvnw clean javafx:run`*
 
-**Make sure you are in the root directory of the project where yout can access the `pom.xml` file.**
+**Make sure you are in the root directory of the project where you can access the `pom.xml` file.**
 
 Once you run this commands maven will start downloading the dependencies and then the application will start.
 
