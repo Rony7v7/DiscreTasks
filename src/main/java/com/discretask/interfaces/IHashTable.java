@@ -1,5 +1,8 @@
 package com.discretask.interfaces;
 
+/**
+ * The IHashTable interface contains the methods that a hash table data structure should implement.
+ */
 public interface IHashTable<K, V> {
     
     public V put(K key, V value);

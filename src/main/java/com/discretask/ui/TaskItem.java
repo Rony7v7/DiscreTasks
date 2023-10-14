@@ -46,16 +46,68 @@ import javafx.stage.Stage;
  * 
  * El rectangulo de la derecha es para el boton y para la fecha de entrega
  */
+// In english
+/**
+ * This class is important for creating tasks for screen display. 
+ * Its core function is to receive task data and generate an object suitable 
+ * for on-screen presentation. The task itself is organized as a vertical 
+ * rectangle, divided into three distinct horizontal segments, each serving 
+ * a specific purpose. The left segment is dedicated to the task's title, 
+ * description, and category. In the middle segment, the priority is conveyed. 
+ * On the right, you'll find the action button and relevant delivery date information.
+ */
 public class TaskItem extends HBox {
 
+    /**
+     * The optionsButton variable is a JavaFX Button object that is used to open a
+     * context menu.
+     */
     private Button optionsButton;
+
+    /**
+     * The sdf variable is a SimpleDateFormat object that is used to format the
+     * date.
+     */
     private SimpleDateFormat sdf;
+
+    /**
+     * The eliminarMenuItem variable is a JavaFX MenuItem object that is used to
+     * delete a task.
+     */
     private MenuItem eliminarMenuItem;
+
+    /**
+     * The modificarMenuItem variable is a JavaFX MenuItem object that is used to
+     * modify a task.
+     */
     private MenuItem modificarMenuItem;
+
+    /**
+     * The contextMenu variable is a JavaFX ContextMenu object that is used to
+     * display a context menu.
+     */
     private ContextMenu contextMenu;
+
+    /**
+     * The controller variable is an instance of the MainController class.
+     */
     private MainController controller;
+
+    /**
+     * The task variable is an instance of the Task class.
+     */
     private Task task;
 
+    /**
+     * The default constructor for the TaskItem class initializes the controller and
+     * task objects. It also initializes the eliminarMenuItem, modificarMenuItem,
+     * contextMenu, sdf, and optionsButton objects.
+     * 
+     * @param task       The task parameter is of type Task, which means it can be
+     *                   any type of task.
+     * @param controller The controller parameter is of type MainController, which
+     *                   means it can be any type of MainController.
+     */
     public TaskItem(Task task, MainController controller) {
         this.controller = controller;
         this.task = task;
@@ -74,63 +126,84 @@ public class TaskItem extends HBox {
         // Configure spacing between VBox containers
         setSpacing(10); // Espacio entre los VBox
 
-        // Con esto le ponemos un borde al TaskItem
+        // Configure the HBox
         setStyle("-fx-border-color: gray; -fx-border-width: 0 0 1px 0; -fx-padding: 10px;");
     }
 
+    /**
+     * The buildLeftVbox function creates a VBox object that contains the task's
+     * title, description, and category.
+     * 
+     * @param task The task parameter is of type Task, which means it can be any
+     *             type of task.
+     * @return The method is returning a VBox object.
+     */
     private VBox buildLeftVbox(Task task) {
-        // Vuelve todos esos String de la Tarea a Labels (Cosas que se pueden poner
-        // dentro de la caja vertical)
+        // Convert all of the task's strings to labels (things that can be placed
+        // inside the vertical box)
         Label titleLabel = new Label(task.getTitle());
         Label descriptionLabel = new Label(task.getContent());
         Label categoryLabel = new Label(task.getUserCategory());
 
-        // Llamamos a la funcion de abajo para que todos los labels tengan el mismo
-        // estilo
+        // Call the function below to apply the same style to all labels
         applyStylesToLabel(titleLabel);
         applyStylesToLabel(descriptionLabel);
         applyStylesToLabel(categoryLabel);
         descriptionLabel.setStyle("-fx-wrap-text: true;");
 
-        // (Ponemos todos estos elementos dentro de la caja para poder mostrarla)
+        // Put all of these elements inside a VBox so that we can display them
         VBox leftVbox = new VBox(titleLabel, descriptionLabel, categoryLabel);
-        // Esto es para que se expanda el VBox y rellene todo
+        
+        // This is to expand the VBox and fill everything
         HBox.setHgrow(leftVbox, javafx.scene.layout.Priority.ALWAYS);
 
-        // Añadir un margen flexible al VBox (ajustado al ancho total)
+        // Add a flexible margin to the VBox (adjusted to the total width)
         setMargin(leftVbox, new Insets(0, this.getWidth() / 3, 0, 0));
         leftVbox.setStyle("-fx-alignment: top-left;");
 
         return leftVbox;
     }
 
+    /**
+     * The buildMiddleVbox function creates a VBox object that contains the task's
+     * priority.
+     * 
+     * @param task The task parameter is of type Task, which means it can be any
+     *             type of task.
+     * @return The method is returning a VBox object.
+     */
     private VBox buildMiddleVbox(Task task) {
-        // Contruimos el VBox del medio con el priority: El circulo del color de la
-        // prioridad
+        // Construct the middle VBox with the priority: The circle representing 
+        // the priority color.
         Label priorityLabel = new Label("Priority: ");
         Priority priority = task.getPriority();
         Circle priorityCircle = priorityCircle(priority);
 
-        // Metemos estos elementos dentro de una caja auxiliar para que queden lado a
-        // lado
+        // Place these elements within a helper box to align them side by side.
         HBox helperBox = new HBox(priorityLabel, priorityCircle);
 
-        // Hacemos que todos los items de la caja auxiliar esten en el centro abajo
+        // Ensure all items in the helper box are centered at the bottom.
         helperBox.setAlignment(Pos.BOTTOM_CENTER);
 
-        // Metemos la caja auxiliar a la caja vertical del medio
+        // Include the helper box within the middle vertical box.
         VBox middleVbox = new VBox(helperBox);
         middleVbox.setAlignment(Pos.BOTTOM_CENTER);
 
-        // Ponemos el margin y hacemos que la caja ocupe lo mismo que los demas con el
-        // Hgrow
+        // Set the margin and make the box occupy the same space as others with Hgrow.
         setMargin(middleVbox, new Insets(0, 0, 0, this.getWidth() / 3));
         HBox.setHgrow(middleVbox, javafx.scene.layout.Priority.ALWAYS);
 
         return middleVbox;
     }
 
-    // Este metodo es que segun la prioridad le damos un color al boton
+    /**
+     * The priorityCircle function creates a Circle object that represents the
+     * priority of a task.This method is used to put the color of the priority.
+     * 
+     * @param priority The priority parameter is of type Priority, which means it can
+     *                 be any type of priority.
+     * @return The method is returning a Circle object.
+     */
     private Circle priorityCircle(Priority priority) {
         Circle priorityCircle = new Circle(6);
         if (priority == Priority.HIGH_PRIORITY) {
@@ -147,27 +220,33 @@ public class TaskItem extends HBox {
         return priorityCircle;
     }
 
+    /**
+     * The buildRightVbox function creates a VBox object that contains the task's
+     * deadline.
+     * 
+     * @param task The task parameter is of type Task, which means it can be any
+     *             type of task.
+     * @return The method is returning a VBox object.
+     */
     private VBox buildRightVbox(Task task) {
-        // Creamos el label con la fecha
+        // Create a label with the date
         Label dateLabel = new Label(sdf.format(task.getDeadline().getTime()));
 
-        // Le ponemos los mismos estilos que a los textos
+        // Apply the same style to the label
         applyStylesToLabel(dateLabel);
         dateLabel.setAlignment(Pos.BOTTOM_RIGHT);
         // Metemos el boton dentro de una caja auxiliar para que quede en el centro
 
-        // Configuramos el boton (Esta funcion sera util mas adelante para que cuando
-        // alguien oprima el boton se abra un menu)
+        // Place the button within a helper box for centering
         configureOptionsButton();
-
         HBox helperBox = new HBox(optionsButton);
         helperBox.setAlignment(Pos.CENTER_RIGHT);
 
-        // Metemos el boton y el label dentro de la caja vertical junto con la fecha
+        // Combine the button, label, and date within the vertical box
         VBox rightVbox = new VBox(helperBox, dateLabel);
         rightVbox.setAlignment(Pos.BOTTOM_RIGHT);
-        // Intento de que el boton quede arriba a la derecha haciendo que la caja
-        // auxiliar sea la mitad de la caja total
+        
+        // Attempt to position the button in the top right corner by setting the helper box's height
         helperBox.setPrefHeight(rightVbox.getPrefHeight() / 2);
         HBox.setHgrow(rightVbox, javafx.scene.layout.Priority.ALWAYS);
 
@@ -175,6 +254,9 @@ public class TaskItem extends HBox {
 
     }
 
+    /**
+     * The configureOptionsButton function configures the optionsButton object.
+     */
     private void configureOptionsButton() {
         optionsButton.setStyle(
                 " -fx-text-fill: black;" +
@@ -217,6 +299,13 @@ public class TaskItem extends HBox {
 
     }
 
+    /**
+     * The openModifyMenu function opens a new window to modify a task and sets up
+     * the necessary dependencies.
+     * 
+     * @throws IOException The IOException is thrown if an input or output
+     *                     exception occurs.
+     */
     private void openModifyMenu() throws IOException {
         Stage stage = new Stage();
         stage.setTitle("Modify Task");
@@ -226,16 +315,25 @@ public class TaskItem extends HBox {
         stage.setScene(new Scene(root));
         stage.getIcons().add(new Image("/com/discretask/img/T.png"));
 
-        // Esto es necesario para poder acceder a los metodos del controlador
+        // It is necessary to access the methods of the controller
         AddTaskMenuController addTaskMenuController = loader.getController();
-        // Esto es para hacer una inyeccion de dependencias (Para que todos esten
-        // instacaiados igual)
+       
+        // This is for dependency injection (to ensure uniform 
+        //instantiation of all components).
         addTaskMenuController.setMainController(controller);
         addTaskMenuController.setStage(stage);
         changeAddTaskMenuToModifyTaskMenu(addTaskMenuController);
         stage.show();
     }
 
+    /**
+     * The changeAddTaskMenuToModifyTaskMenu function changes the AddTaskMenu to a
+     * ModifyTaskMenu.
+     * 
+     * @param addTaskMenuController The addTaskMenuController parameter is of type
+     *                              AddTaskMenuController, which means it can be any
+     *                              type of AddTaskMenuController.
+     */
     private void changeAddTaskMenuToModifyTaskMenu(AddTaskMenuController addTaskMenuController) {
         changeTitles(addTaskMenuController);
         addTaskMenuController.setIsEditing(true);
@@ -247,6 +345,14 @@ public class TaskItem extends HBox {
         addTaskMenuController.setDeadlineInput(task.getDeadline());
     }
 
+    /**
+     * The changeTitles function changes the titles of the AddTaskMenu to the
+     * ModifyTaskMenu.
+     * 
+     * @param addTaskMenuController The addTaskMenuController parameter is of type
+     *                              AddTaskMenuController, which means it can be any
+     *                              type of AddTaskMenuController.
+     */
     private void changeTitles(AddTaskMenuController addTaskMenuController) {
         addTaskMenuController.setHeader("Modify Task");
         addTaskMenuController.setTitleLabel("New Title");
@@ -257,6 +363,12 @@ public class TaskItem extends HBox {
         addTaskMenuController.setSubmitBTNText("Modify Task!");
     }
 
+    /**
+     * The applyStylesToLabel function applies the same style to all labels.
+     * 
+     * @param label The label parameter is of type Label, which means it can be any
+     *              type of label.
+     */
     private void applyStylesToLabel(Label label) {
         label.setStyle("-fx-font-weight: bold;");
         label.setStyle("-fx-alignment: center;");

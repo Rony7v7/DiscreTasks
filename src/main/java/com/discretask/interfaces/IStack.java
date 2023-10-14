@@ -1,5 +1,8 @@
 package com.discretask.interfaces;
 
+/**
+ * The IStack interface contains the methods that a stack data structure should implement.
+ */
 public interface IStack<T> {
     
     public void push(T s);

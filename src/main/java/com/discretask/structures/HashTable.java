@@ -2,24 +2,53 @@ package com.discretask.structures;
 
 import com.discretask.interfaces.IHashTable;
 
+/**
+ * The HashTable class is an implementation of the IHashTable interface in Java.
+ */
 public class HashTable<K, V> implements IHashTable<K, V> {
 
+    /**
+     * The size variable represents the number of key-value pairs in the hash table.
+     */
     private int size;
+
+    /**
+     * The final variable DEFAULT_SIZE represents the default size of the hash table.
+     */
     private final int DEFAULT_SIZE = 11;
+
+    /**
+     * The table variable is an array of type NodeHashTable, which is a generic type
+     * representing a node in a hash table.
+     */
     private NodeHashTable<K, V> table[];
 
+    /**
+     * This is a default constructor for a hash table that initializes the size of
+     * the hash table to zero and
+     * initializes the table variable to an array of type NodeHashTable.
+     */
     @SuppressWarnings("unchecked")
     public HashTable() {
         this.size = 0;
         this.table = new NodeHashTable[DEFAULT_SIZE];
     }
 
+    /**
+     * This is a constructor for a hash table that takes a size parameter and
+     * initializes the size of the hash.
+     * @param size The size parameter is an integer value representing the size of the hash table.
+     */
     @SuppressWarnings("unchecked")
     public HashTable(int size) {
         this.size = 0;
         this.table = new NodeHashTable[size];
     }
-
+    /**
+     * The function returns the array of NodeHashTable objects.
+     * 
+     * @return The method is returning an array of NodeHashTable objects.
+     */
     public NodeHashTable<K, V>[] getTable() {
         return table;
     }
@@ -58,6 +87,10 @@ public class HashTable<K, V> implements IHashTable<K, V> {
 
     }
 
+    /**
+     * The `resize()` function resizes the hash table by creating a new table with double the capacity,
+     * rehashing all the elements from the old table into the new table, and updating the size.
+     */
     @SuppressWarnings("unchecked")
     public void resize() {
         NodeHashTable<K, V>[] oldTable = table;
@@ -204,6 +237,10 @@ public class HashTable<K, V> implements IHashTable<K, V> {
         return index >= 0 ? index : index * -1;
     }
 
+    /**
+     * The function clears the hash table by setting the size to 0 and creating a new array of
+     * NodeHashTable objects.
+     */
     @SuppressWarnings("unchecked")
     @Override
     public void clear() {
@@ -233,6 +270,12 @@ public class HashTable<K, V> implements IHashTable<K, V> {
         return keys;
     }
 
+    /**
+     * The function returns an array of values from a hash table.
+     * 
+     * @return The method is returning an array of type V, which represents the values stored in the hash
+     *         table.
+     */
     @SuppressWarnings("unchecked")
     public V[] values() {
         V[] values = (V[]) new Object[size];

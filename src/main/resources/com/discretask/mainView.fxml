@@ -82,10 +82,5 @@
               <Font name="Dubai Regular" size="50.0" />
           </font>
       </Text>
-      <Label layoutX="45.0" layoutY="560.0" style="-fx-font-weight: 700;" text="You can use ctrl+z to undo">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </Label>
     </children>
 </AnchorPane>
