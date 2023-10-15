@@ -45,7 +45,6 @@ public class DiscretasksSystem {
      */
     private Stack<Command> operationStack;
 
-
     /**
      * Constructor for DiscretasksSystem.
      */
@@ -150,7 +149,6 @@ public class DiscretasksSystem {
 
     }
 
-    
     /**
      * The function assigns a task to a data structure based on its priority level.
      * 
@@ -181,7 +179,6 @@ public class DiscretasksSystem {
             priorityTasks.remove(task);
     }
 
-
     /**
      * The function pops a command from the operation stack and calls its `undo` method.
      * This function is used to undo the last operation.
@@ -192,7 +189,6 @@ public class DiscretasksSystem {
             command.undo(this);
         }
     }
-
 
     /**
      * The deleteTask function removes a task from the collections and the hashtable, and 
@@ -219,7 +215,6 @@ public class DiscretasksSystem {
         tasks.remove(key);
 
     }
-
 
     /**
      * The function returns the queue of non-priority tasks.
@@ -248,7 +243,6 @@ public class DiscretasksSystem {
         return tasks;
     }
 
-
     /**
      * The function returns the heap of tasks sorted by their deadline.
      * 
@@ -257,7 +251,6 @@ public class DiscretasksSystem {
     public Heap<Task> getTasksByDeadLine() {
         return tasksByDeadLine;
     }
-
 
     /**
      * The function "getSortedHeap" returns a sorted array of tasks based on the specified type (either
@@ -319,7 +312,6 @@ public class DiscretasksSystem {
 
     }
 
-
     /**
      * The merge function merges two sorted arrays into one sorted array using a comparator to determine
      * the order.
@@ -366,7 +358,6 @@ public class DiscretasksSystem {
 
     }
 
-    
     /**
      * The function initializes the system by creating tasks with different priorities and due dates.
      */
