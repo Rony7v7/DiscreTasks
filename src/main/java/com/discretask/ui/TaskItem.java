@@ -21,6 +21,7 @@ import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -28,25 +29,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 
-/**
- * Esta clase es necesaria para crear la tarea que se vera en la pantalla.
- * 
- * El objetivo de esta clase es el de recibir una tarea y crear un objeto que
- * podamos mostrar en pantalla
- * 
- * 
- * la tarea esta pensada como una rectangulo vertical el cual esta dividido en 3
- * rectangulos horizontales,
- * cada uno de estos rectangulos tiene un contenido propio.
- * 
- * El rectangulo de la izquierda es para el titulo, la descripcion y la
- * categoria
- * 
- * El rectangulo del medio es para la prioridad
- * 
- * El rectangulo de la derecha es para el boton y para la fecha de entrega
- */
-// In english
+
 /**
  * This class is important for creating tasks for screen display. 
  * Its core function is to receive task data and generate an object suitable 
@@ -115,7 +98,7 @@ public class TaskItem extends HBox {
         modificarMenuItem = new MenuItem("Modificar");
         contextMenu = new ContextMenu();
         sdf = new SimpleDateFormat("dd-MM-yyyy");
-        optionsButton = new Button(". . .");
+        optionsButton = new Button();
         contextMenu.getItems().addAll(eliminarMenuItem, modificarMenuItem);
 
         configureOptionsButton();
@@ -126,8 +109,9 @@ public class TaskItem extends HBox {
         // Configure spacing between VBox containers
         setSpacing(10); // Espacio entre los VBox
 
-        // Configure the HBox
-        setStyle("-fx-border-color: gray; -fx-border-width: 0 0 1px 0; -fx-padding: 10px;");
+        // Con esto le ponemos un borde al TaskItem
+        setStyle(
+                "-fx-background-color:  #EEEEEE ;-fx-border-color: gray; -fx-border-width: 1px ; -fx-padding: 10px; -fx-border-radius: 5px; ");
     }
 
     /**
@@ -159,7 +143,7 @@ public class TaskItem extends HBox {
 
         // Add a flexible margin to the VBox (adjusted to the total width)
         setMargin(leftVbox, new Insets(0, this.getWidth() / 3, 0, 0));
-        leftVbox.setStyle("-fx-alignment: top-left;");
+        leftVbox.setStyle("-fx-alignment: top-left; -fx-border-radius: 5px;");
 
         return leftVbox;
     }
@@ -192,7 +176,7 @@ public class TaskItem extends HBox {
         // Set the margin and make the box occupy the same space as others with Hgrow.
         setMargin(middleVbox, new Insets(0, 0, 0, this.getWidth() / 3));
         HBox.setHgrow(middleVbox, javafx.scene.layout.Priority.ALWAYS);
-
+        middleVbox.setStyle("-fx-border-radius: 5px;");
         return middleVbox;
     }
 
@@ -249,7 +233,7 @@ public class TaskItem extends HBox {
         // Attempt to position the button in the top right corner by setting the helper box's height
         helperBox.setPrefHeight(rightVbox.getPrefHeight() / 2);
         HBox.setHgrow(rightVbox, javafx.scene.layout.Priority.ALWAYS);
-
+        rightVbox.setStyle("-fx-border-radius: 5px;");
         return rightVbox;
 
     }
@@ -258,10 +242,16 @@ public class TaskItem extends HBox {
      * The configureOptionsButton function configures the optionsButton object.
      */
     private void configureOptionsButton() {
+
+        ImageView imageView = new ImageView(new Image("/com/discretask/img/three-dots.png"));
+        imageView.setFitWidth(25); // Set the width to 32 pixels
+        imageView.setFitHeight(25); // Set the height to 32 pixels
+        optionsButton.setGraphic(imageView);
         optionsButton.setStyle(
                 " -fx-text-fill: black;" +
                         "-fx-alignment: top-right; -fx-font-weight: bold; " +
-                        "-fx-font-size: 1em;  -fx-border-width: 1;");
+                        "-fx-font-size: 1em; -fx-border-width: 1;" +
+                        "-fx-background-color: transparent;");
         // Configure the event to toggle the ContextMenu's visibility
         optionsButton.setOnMouseClicked(event -> {
             if (event.getButton() == MouseButton.PRIMARY) { // Check if left button is clicked
