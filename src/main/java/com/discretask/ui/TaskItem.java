@@ -29,25 +29,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 
-/**
- * Esta clase es necesaria para crear la tarea que se vera en la pantalla.
- * 
- * El objetivo de esta clase es el de recibir una tarea y crear un objeto que
- * podamos mostrar en pantalla
- * 
- * 
- * la tarea esta pensada como una rectangulo vertical el cual esta dividido en 3
- * rectangulos horizontales,
- * cada uno de estos rectangulos tiene un contenido propio.
- * 
- * El rectangulo de la izquierda es para el titulo, la descripcion y la
- * categoria
- * 
- * El rectangulo del medio es para la prioridad
- * 
- * El rectangulo de la derecha es para el boton y para la fecha de entrega
- */
-// In english
+
 /**
  * This class is important for creating tasks for screen display. 
  * Its core function is to receive task data and generate an object suitable 
