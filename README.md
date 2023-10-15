@@ -39,11 +39,12 @@ to manage the tasks.
 
 Since we are using Maven to manage the dependencies, you will have to run the project using the following command:  
 
-If you have maven installed in your computer: `mvn clean javafx:run`
+If you have maven installed in your computer: ```mvn clean javafx:run```
 
-If you don't have maven installed in your computer: `mvnw clean javafx:run`
+If you don't have maven installed in your computer: ```mvnw clean javafx:run```
 
-     *In some cases to run the maven wraper you will need to run `.\mvnw clean javafx:run`*
+In some cases to run the maven wraper you will need to run 
+    ```.\mvnw clean javafx:run```
 
 **Make sure you are in the root directory of the project where you can access the `pom.xml` file.**
 
@@ -55,4 +56,4 @@ In the project you will find a folder called `DOCS` where you can find the docum
 
 ---
 
-![Alt text](src/main/resources/com/discretask/img/ApplicationSample.png)
+![Alt text](src/main/resources/com/discretask/img/ApplicationSample.PNG)
