@@ -33,7 +33,7 @@ to manage the tasks.
 
     `git clone https://github.com/Rony7v7/DiscreTasks`
 
-2. Open the project in your favorite IDE (IntelliJ, Eclipse, Netbeans, VsCode, etc)
+2. Open a terminal, it can be PowerShell or some other. If you have any trouble with powershell try gitBash or windows terminal.
 
 #### How to run it?
 
