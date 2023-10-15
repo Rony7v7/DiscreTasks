@@ -77,7 +77,7 @@ public class TaskItem extends HBox {
 
         // Con esto le ponemos un borde al TaskItem
         setStyle(
-                "-fx-background-color:  #CAE9F4 ;-fx-border-color: gray; -fx-border-width: 1px ; -fx-padding: 10px; -fx-border-radius: 5px; ");
+                "-fx-background-color:  #EEEEEE ;-fx-border-color: gray; -fx-border-width: 1px ; -fx-padding: 10px; -fx-border-radius: 5px; ");
     }
 
     private VBox buildLeftVbox(Task task) {
